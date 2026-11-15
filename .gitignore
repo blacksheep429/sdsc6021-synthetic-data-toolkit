@@ -1,7 +1,15 @@
 # 实验产物：图片、特征、模型和逐次运行记录保存在 runs/，不提交到 Git
 runs/
+deliverables/
 *.npy
 *.npz
+*.whl
+*.part
+*.tmp
+
+# 安装器异常回落到工作目录时的临时文件；正常临时目录应在 runs/_cache/tmp/
+/pip-*/
+/tmp*
 
 # 模型权重
 *.pt
