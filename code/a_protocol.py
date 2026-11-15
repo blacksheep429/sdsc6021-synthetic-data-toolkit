@@ -110,6 +110,14 @@ def class_texts(config: dict, template: str) -> list[str]:
     return [template.format(class_name=name) for name in config["dataset"].get("class_phrases", CLASSES)]
 
 
+def generation_core_hash(config: dict) -> str:
+    """Sampling inputs, excluding only explicit invalid-output handling policies."""
+    return config_hash({"generation":{k:v for k,v in config["generation"].items()
+                        if k not in {"invalid_output_policy","safety_flag_policy"}},
+                        "classes":config["dataset"]["classes"],
+                        "class_phrases":config["dataset"].get("class_phrases",list(CLASSES))})
+
+
 def generation_batches(items: list, size: int) -> list[list]:
     """Keep original batch membership fixed when resuming a partial run."""
     if not 1 <= size <= 4:
@@ -151,4 +159,11 @@ def verified_item(run_dir: Path, item: dict, fingerprint: str) -> dict | None:
                 "relative_path": item["relative_path"], "class_id": item["class_id"]}
     if any(record.get(key) != value for key, value in expected.items()) or file_hash(image_path) != record.get("sha256"):
         raise ValueError(f"Existing output failed integrity/config check: {item['image_id']}")
+    if record.get("safety_flag"):
+        review_path = inside(run_dir,record["safety_review_relative_path"])
+        review = json.loads(review_path.read_text(encoding="utf-8"))
+        if (file_hash(review_path) != record["safety_review_sha256"] or review.get("sha256") != record["sha256"]
+                or review.get("decision") != "safe_to_retain_same_image" or review.get("config_hash") != fingerprint
+                or review.get("generation_seed") != item["generation_seed"]):
+            raise ValueError("Cached image no longer has its exact safety review proof")
     return record

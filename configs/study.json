@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "protocol_version": "0.3-frozen",
-  "protocol_status": "frozen",
-  "run_id": "synthetic_v1",
+  "protocol_version": "0.4-draft",
+  "protocol_status": "draft",
+  "run_id": "synthetic_v2",
   "dataset": {
     "name": "CIFAR10",
     "classes": [
@@ -54,7 +54,8 @@
     "candidates_per_class": 200,
     "seed_base": 20261115,
     "generator_device": "cpu",
-    "invalid_output_policy": "stop_no_seed_substitution",
+    "invalid_output_policy": "stop_nonfinite_or_black_no_seed_substitution",
+    "safety_flag_policy": "review_same_image",
     "warmup_steps": 2,
     "batch_size": 4
   },
@@ -112,10 +113,6 @@
     "generation_seed_offset": 10000000
   },
   "gates": {
-    "g2_passed": true,
-    "g2_evidence": {
-      "path": "shared/g2_smoke_20261115T093625_435949Z/g2_gate.json",
-      "sha256": "b37cda1bf14f0e0060e34716cedd9c3ba523efee8bf48d79c2817e89d4f14872"
-    }
+    "g2_passed": false
   }
 }

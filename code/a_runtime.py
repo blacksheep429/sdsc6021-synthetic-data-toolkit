@@ -19,6 +19,10 @@ from a_protocol import (ROOT, CLASSES, atomic_json, candidate_plan, class_texts,
                         file_hash, inside, require_g2, verified_item)
 
 
+class SafetyReviewRequired(RuntimeError):
+    pass
+
+
 def configure_caches() -> None:
     temporary = ROOT / "runs/_cache/tmp"
     temporary.mkdir(parents=True, exist_ok=True)
@@ -82,7 +86,45 @@ def load_pipeline(config: dict):
         algorithm_type=gen["algorithm_type"], use_karras_sigmas=gen["use_karras_sigmas"])
     pipe.to("cuda")
     pipe.set_progress_bar_config(disable=True)
+    if gen.get("safety_flag_policy") == "review_same_image":
+        checker = pipe.run_safety_checker
+        def capture_then_check(images,device,dtype):
+            if isinstance(images,torch.Tensor):
+                pipe._pre_safety_finite = torch.isfinite(images).flatten(1).all(1).cpu().tolist()
+                pipe._pre_safety_images = pipe.image_processor.postprocess(images.detach().clone(),output_type="pil")
+            else:
+                import numpy as np
+                pipe._pre_safety_finite = [bool(np.isfinite(im).all()) for im in images]
+                pipe._pre_safety_images = pipe.image_processor.numpy_to_pil(images.copy())
+            return checker(images,device,dtype)
+        pipe.run_safety_checker = capture_then_check
     return pipe
+
+
+def resolve_safety_flag(run_dir: Path,item: dict,image,fingerprint: str) -> dict:
+    """Stop for explicit safety-only review; never substitute a seed or sample."""
+    directory = inside(run_dir,f"audits/safety_flags/{item['image_id']}")
+    directory.mkdir(parents=True,exist_ok=True)
+    path = directory/"original_generated_image.png"
+    buffer = io.BytesIO()
+    image.save(buffer,format="PNG")
+    payload = buffer.getvalue()
+    digest = hashlib.sha256(payload).hexdigest()
+    if path.exists() and file_hash(path) != digest:
+        raise RuntimeError("Flagged source image changed on exact-seed replay")
+    path.write_bytes(payload)
+    atomic_json(directory/"flag.json",{"status":"flagged_for_safety_review","image_id":item["image_id"],
+        "generation_seed":item["generation_seed"],"prompt":item["prompt"],"sha256":digest,"config_hash":fingerprint})
+    review_path = directory/"review.json"
+    if not review_path.exists():
+        raise SafetyReviewRequired(f"Safety review required for same generated image: {item['image_id']}")
+    review = json.loads(review_path.read_text(encoding="utf-8"))
+    expected = {"decision":"safe_to_retain_same_image","image_id":item["image_id"],
+                "generation_seed":item["generation_seed"],"sha256":digest,"config_hash":fingerprint}
+    if any(review.get(k) != v for k,v in expected.items()) or not review.get("reviewer"):
+        raise RuntimeError("Safety review does not approve this exact image/config")
+    return {"safety_flag":True,"safety_review_relative_path":str(review_path.relative_to(run_dir)).replace("\\","/"),
+            "safety_review_sha256":file_hash(review_path)}
 
 
 def generate(config: dict, *, smoke: bool, limit: int = 1, per_class: int | None = None,
@@ -133,6 +175,7 @@ def generate(config: dict, *, smoke: bool, limit: int = 1, per_class: int | None
     load_seconds = 0.0
     warmup_seconds = 0.0
     peak_memory = 0
+    pending_reviews = []
     stage_start = time.perf_counter()
     if todo:
         import numpy as np
@@ -173,10 +216,30 @@ def generate(config: dict, *, smoke: bool, limit: int = 1, per_class: int | None
                 if len(images) != len(batch):
                     raise RuntimeError("Pipeline returned an incorrect batch size")
                 # Validate the entire batch before publishing any successful image.
-                for item,image,flag in zip(batch,images,output.nsfw_content_detected or [False]*len(batch)):
-                    if image.size != (gen["width"],gen["height"]) or int(np.asarray(image).max()) <= 1 or flag:
-                        raise RuntimeError(f"Invalid/black/flagged output: {item['image_id']}; no seed substitution")
-                for item,image in zip(batch,images):
+                reviews = []
+                batch_pending = False
+                for offset,(item,image,flag) in enumerate(zip(batch,images,output.nsfw_content_detected or [False]*len(batch))):
+                    review = {"safety_flag":False}
+                    if hasattr(pipe,"_pre_safety_finite") and not pipe._pre_safety_finite[offset]:
+                        raise RuntimeError(f"Non-finite model output: {item['image_id']}")
+                    if flag and gen.get("safety_flag_policy") == "review_same_image":
+                        image = pipe._pre_safety_images[offset].convert("RGB")
+                        try:
+                            review = resolve_safety_flag(run_dir,item,image,fingerprint)
+                        except SafetyReviewRequired:
+                            pending_reviews.append(item["image_id"])
+                            batch_pending = True
+                            print(f"[safety-review-pending] {item['image_id']}; deferring this original batch",flush=True)
+                        images[offset] = image
+                    elif flag:
+                        raise RuntimeError(f"Flagged output: {item['image_id']}; no seed substitution")
+                    if image.size != (gen["width"],gen["height"]) or int(np.asarray(image).max()) <= 1:
+                        raise RuntimeError(f"Invalid/black output: {item['image_id']}; no seed substitution")
+                    reviews.append(review)
+                if batch_pending:
+                    atomic_json(run_dir/"audits/safety_pending.json",{"status":"awaiting_safety_reviews", "image_ids":pending_reviews})
+                    continue
+                for item,image,review in zip(batch,images,reviews):
                     save_start = time.perf_counter()
                     data = io.BytesIO()
                     image.save(data,format="PNG")
@@ -198,11 +261,14 @@ def generate(config: dict, *, smoke: bool, limit: int = 1, per_class: int | None
                         batch_index=batch_index,batch_members=[i["image_id"] for i in batch],
                         batch_inference_seconds=batch_seconds,serialization_seconds=serialization_seconds,
                         mode="smoke" if smoke else "main")
+                    record.update(review)
                     atomic_json(inside(run_dir,f"manifests/items/{item['image_id']}.json"),record)
                     known[item["image_id"]] = record
                     records.append(record)
                 atomic_json(run_dir/"generation_progress.json",{"status":"running","completed":len(known),
                     "total":len(items),"config_hash":fingerprint,"batch_index":batch_index})
+            if pending_reviews:
+                raise SafetyReviewRequired("Same-image safety reviews pending: "+",".join(pending_reviews))
             peak_memory = torch.cuda.max_memory_allocated()
         except Exception as exc:
             stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S_%fZ")
@@ -216,6 +282,9 @@ def generate(config: dict, *, smoke: bool, limit: int = 1, per_class: int | None
             del pipe
             release_cuda()
     records.sort(key=lambda record: record["image_id"])
+    if (run_dir/"audits/safety_pending.json").exists() or any(r.get("safety_flag") for r in records):
+        atomic_json(run_dir/"audits/safety_pending.json",{"status":"resolved","image_ids":[],
+                    "reviewed_ids":[r["image_id"] for r in records if r.get("safety_flag")]})
     atomic_json(run_dir / "manifests/candidates.json", records)
     summary = {"status": "success", "mode": "smoke" if smoke else "main", "config_hash": fingerprint,
                "run_dir": str(run_dir.relative_to(ROOT)), "count": len(records), "generated": len(todo),

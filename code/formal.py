@@ -1,6 +1,7 @@
 """G3 stages around the same generation/selection/features/head implementations."""
 from __future__ import annotations
 import json
+import shutil
 import time
 from datetime import datetime,timezone
 from pathlib import Path
@@ -8,11 +9,54 @@ from pathlib import Path
 import numpy as np
 
 from a_protocol import (ROOT, CONDITIONS, atomic_json, candidate_plan, config_hash,
-                        critical_sources, file_hash, inside, require_g2, verified_item)
+                        critical_sources, file_hash, inside, require_g2, verified_item, generation_core_hash)
 from a_runtime import configure_caches, environment
 from classifier import train_heads
 from data_features import extract_features, materialize_real
 from selection import make_selections, score_images
+
+
+def adopt_generation(config: dict,source_run: str) -> dict:
+    """Preserve byte-identical accepted outputs across a post-checker-only revision."""
+    require_g2(config)
+    source = inside(ROOT/"runs",source_run)
+    prior = json.loads((source/"protocol.json").read_text(encoding="utf-8"))
+    if prior["mode"] != "main" or generation_core_hash(prior["config"]) != generation_core_hash(config):
+        raise ValueError("Generation inputs changed; old images cannot be adopted")
+    if json.loads((source/"environment.json").read_text(encoding="utf-8"))["packages"] != environment()["packages"]:
+        raise ValueError("Generation package versions changed")
+    destination = inside(ROOT/"runs",config["run_id"])
+    if destination.exists():
+        raise ValueError("Adoption requires a fresh destination run; preserve previous evidence")
+    records = []
+    for item in candidate_plan(prior["config"]):
+        old = verified_item(source,item,prior["config_hash"])
+        if old is not None:
+            records.append(old)
+    destination.mkdir(parents=True,exist_ok=False)
+    atomic_json(destination/"protocol.json",{"mode":"main","config_hash":config_hash(config),"config":config,
+        "requested_image_ids":[r["image_id"] for r in candidate_plan(config)]})
+    atomic_json(destination/"environment.json",environment())
+    for record in records:
+        target = inside(destination,record["relative_path"])
+        target.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copyfile(inside(source,record["relative_path"]),target)
+        if file_hash(target) != record["sha256"]:
+            raise ValueError("Adopted image checksum changed")
+        migrated = dict(record,config_hash=config_hash(config),migration={"source_run":source_run,
+            "source_config_hash":prior["config_hash"],"source_image_sha256":record["sha256"],
+            "source_record_sha256":file_hash(source/f"manifests/items/{record['image_id']}.json"),
+            "generation_core_hash":generation_core_hash(config)})
+        atomic_json(destination/f"manifests/items/{record['image_id']}.json",migrated)
+    failures = [{"source":str(path.relative_to(ROOT)).replace("\\","/"),"sha256":file_hash(path),
+                 "record":json.loads(path.read_text(encoding="utf-8"))}
+                for path in sorted((source/"logs").glob("generation_failure_*.json"))]
+    report = {"status":"compatible_generation_adopted","source_run":source_run,"destination_run":config["run_id"],
+        "images":len(records),"generation_core_hash":generation_core_hash(config),"source_config_hash":prior["config_hash"],
+        "destination_config_hash":config_hash(config),"source_failures":failures,
+        "reason":"Only post-generation safety-flag handling changed; every accepted image reused byte-for-byte, with original seeds/prompts/model/sampler and source records preserved."}
+    atomic_json(destination/"audits/migration.json",report)
+    return report
 
 
 def main_root(config: dict) -> Path:
@@ -218,6 +262,13 @@ def export_formal(config: dict) -> dict:
     artifacts.append({"artifact_id":"training_features","kind":"portable_npz",**feature_report["bundle"],
                       "run_id":config["run_id"],"access":"local_only_not_delivered"})
     atomic_json(shared/"artifacts.json",artifacts)
+    safety_reviews = []
+    for path in sorted((root/"audits/safety_flags").glob("*/review.json")):
+        safety_reviews.append({"source":str(path.relative_to(root)).replace("\\","/"),"sha256":file_hash(path),
+                               "review":json.loads(path.read_text(encoding="utf-8"))})
+    atomic_json(shared/"safety_reviews.json",safety_reviews)
+    if (root/"audits/migration.json").exists():
+        atomic_json(shared/"migration.json",json.loads((root/"audits/migration.json").read_text(encoding="utf-8")))
     generation_history = []
     for path in sorted((root/"logs").glob("generation_*.json")):
         generation_history.append({"source":str(path.relative_to(ROOT)).replace("\\","/"),"sha256":file_hash(path),

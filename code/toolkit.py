@@ -18,6 +18,7 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=1, help="generate --smoke: maximum 10")
     parser.add_argument("--per-class", type=int, help="generate --smoke: balanced 1-3 images per class")
     parser.add_argument("--run-dir", help="freeze/summarize: a completed local G2 smoke directory")
+    parser.add_argument("--adopt-run", help="generate: adopt verified compatible images from an earlier run ID first")
     parser.add_argument("--final", action="store_true", help="reserved for the final evaluation gate")
     args = parser.parse_args()
     try:
@@ -34,6 +35,12 @@ def main() -> int:
                       "plan": str(path.relative_to(ROOT)), "gpu_used": False, "models_downloaded": False}
         elif args.command in {"doctor", "generate"}:
             from a_runtime import doctor, generate
+            if args.adopt_run:
+                if args.command != "generate" or args.smoke:
+                    parser.error("--adopt-run requires formal generate")
+                from formal import adopt_generation
+                adopted = adopt_generation(config,args.adopt_run)
+                print(json.dumps(adopted,ensure_ascii=True),flush=True)
             if args.per_class is not None and not args.smoke:
                 parser.error("--per-class requires generate --smoke")
             result = doctor(config, models=args.models) if args.command == "doctor" else generate(config, smoke=args.smoke, limit=args.limit,per_class=args.per_class)

@@ -3,12 +3,14 @@ import copy
 import sys
 import tempfile
 import unittest
+import shutil
 from pathlib import Path
 
 import numpy as np
 
 sys.path.insert(0,str(Path(__file__).resolve().parent))
-from a_protocol import ROOT,CONDITIONS,file_hash,generation_batches,load_config
+from a_protocol import ROOT,CONDITIONS,file_hash,generation_batches,load_config,generation_core_hash,candidate_plan,atomic_json,verified_item
+from a_runtime import resolve_safety_flag,SafetyReviewRequired
 from classifier import train_heads
 from evaluation import paired_summary
 
@@ -40,6 +42,43 @@ class FormalChecks(unittest.TestCase):
             paired_summary(rows[:-1],[0,1,2])
         with self.assertRaises(ValueError):
             paired_summary(rows[:-1]+[rows[0]],[0,1,2])
+
+    def test_image_adoption_only_allows_post_generation_policy_changes(self):
+        config = load_config("configs/study.json")
+        changed = copy.deepcopy(config)
+        changed["generation"]["safety_flag_policy"] = "another_handling_policy"
+        self.assertEqual(generation_core_hash(config),generation_core_hash(changed))
+        changed["generation"]["guidance_scale"] += 1
+        self.assertNotEqual(generation_core_hash(config),generation_core_hash(changed))
+
+    def test_flagged_image_requires_a_hash_bound_review_and_cache_keeps_that_proof(self):
+        from PIL import Image
+        config = load_config("configs/study.json")
+        item = candidate_plan(config)[0]
+        directory = ROOT/"runs/_cache/tmp/tests"
+        directory.mkdir(parents=True,exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=directory) as temporary:
+            root = Path(temporary)
+            image = Image.new("RGB",(32,32),(200,20,20))
+            with self.assertRaises(SafetyReviewRequired):
+                resolve_safety_flag(root,item,image,"fixture")
+            flagged = root/f"audits/safety_flags/{item['image_id']}"
+            digest = file_hash(flagged/"original_generated_image.png")
+            review = {"decision":"safe_to_retain_same_image","image_id":item["image_id"],
+                "generation_seed":item["generation_seed"],"sha256":digest,"config_hash":"fixture","reviewer":"unit_fixture"}
+            atomic_json(flagged/"review.json",dict(review,sha256="wrong"))
+            with self.assertRaises(RuntimeError):
+                resolve_safety_flag(root,item,image,"fixture")
+            atomic_json(flagged/"review.json",review)
+            proof = resolve_safety_flag(root,item,image,"fixture")
+            output = root/item["relative_path"]
+            output.parent.mkdir(parents=True)
+            shutil.copyfile(flagged/"original_generated_image.png",output)
+            atomic_json(root/f"manifests/items/{item['image_id']}.json",dict(item,status="success",config_hash="fixture",sha256=digest,**proof))
+            self.assertIsNotNone(verified_item(root,item,"fixture"))
+            atomic_json(flagged/"review.json",dict(review,decision="unapproved"))
+            with self.assertRaises(ValueError):
+                verified_item(root,item,"fixture")
 
     def test_formal_head_resume_checks_inputs_outputs_and_checkpoint_integrity(self):
         config = copy.deepcopy(load_config("configs/study.json"))
