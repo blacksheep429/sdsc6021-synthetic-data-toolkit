@@ -2,7 +2,7 @@
 
 面向 20-shot 图像分类的合成数据增强工具：生成补充图片、选择样本、训练分类器，并评估真实测试效果。
 
-> 当前：G1 已通过，正在进行 G2 小规模完整试跑；新增链路仍需实际运行验收。正式数据生成和最终测试评估尚未开始，具体证据见 progress.md。
+> 当前：G2 小规模完整试跑已通过，配置已冻结；正式 2,000 张生成、15 个分类器及最终测试评估尚未开始。具体证据与后续工作见 progress.md。
 
 ## 阅读入口
 
@@ -31,14 +31,18 @@
 
 依次阅读 agent.md 和 progress.md。[G1 环境检查摘要](shared/g1_environment/check.json) 保存当时的模型文件校验、实际推理结果及限制；当前代码及 G2 状态以 progress.md 为准。
 
+[G2 验收与开发集结果](shared/g2_smoke_20261115T084414_035006Z/check.json)包含五条件链路、缓存、冻结和重载证据；同目录保存真实划分、CLIP 分数、排名、选择及开发集预测。[样图 1](shared/g2_smoke_20261115T084414_035006Z/generation_classes_0_4.jpg) / [样图 2](shared/g2_smoke_20261115T084414_035006Z/generation_classes_5_9.jpg)仅供查看试跑输出，不能替代正式质量抽查或收益评估。
+
 已在本机独立环境验证的命令（本轮模型核验使用完整本地缓存，以 HF_HUB_OFFLINE=1 离线执行）：
 
 ```powershell
 .\.venv\Scripts\python.exe code/toolkit.py doctor
 .\.venv\Scripts\python.exe code/toolkit.py doctor --models
-.\.venv\Scripts\python.exe -m unittest discover -s code -p test_a_protocol.py -v
+.\.venv\Scripts\python.exe code/toolkit.py plan
+.\.venv\Scripts\python.exe code/toolkit.py smoke
+.\.venv\Scripts\python.exe -m unittest discover -s code -p 'test_*.py' -v
 ```
 
 环境使用 Python 3.12.14。重建时用 Python 3.12 创建 .venv，再依次安装 requirements-gpu.txt（官方 cu128 索引）和 requirements.txt（其余固定版本）；pip 命令加 --disable-pip-version-check。本机安装曾复用已有 CUDA 分发包，详细复制和校验记录保留在本地 runs/_cache/。
 
-`doctor --models` 检查 SD1.5 出图、CLIP 打分与冻结 ResNet 特征；首次缺少缓存时需要下载权重。`smoke` 串接小规模五条件开发试跑，正式阶段的选择、特征、训练及最终评估命令仍待 G3/G4 集成。生成质量与增强收益仍需后续评估。
+`doctor --models` 检查 SD1.5 出图、CLIP 打分与冻结 ResNet 特征；首次缺少缓存时需要下载权重。`smoke` 每次保留独立证据并复用经过校验的生成/特征缓存。`freeze --run-dir <本地试跑目录>` 只接受完整检查和十类样图审阅通过的当前配置/代码；`summarize --run-dir <目录>` 导出团队共享快照。正式阶段的选择、特征、训练及最终评估命令仍待 G3/G4 集成。

@@ -1,0 +1,602 @@
+[
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 0,
+    "image_id": "smoke_synth_00_0002",
+    "rank": 1,
+    "target_confidence": 0.9883495569229126,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 0,
+    "image_id": "smoke_synth_00_0001",
+    "rank": 2,
+    "target_confidence": 0.9846656322479248,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 0,
+    "image_id": "smoke_synth_00_0000",
+    "rank": 3,
+    "target_confidence": 0.9602031111717224,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 1,
+    "image_id": "smoke_synth_01_0001",
+    "rank": 1,
+    "target_confidence": 0.8254843354225159,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 1,
+    "image_id": "smoke_synth_01_0000",
+    "rank": 2,
+    "target_confidence": 0.9791107773780823,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 1,
+    "image_id": "smoke_synth_01_0002",
+    "rank": 3,
+    "target_confidence": 0.9839484095573425,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 2,
+    "image_id": "smoke_synth_02_0001",
+    "rank": 1,
+    "target_confidence": 0.9996591806411743,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 2,
+    "image_id": "smoke_synth_02_0002",
+    "rank": 2,
+    "target_confidence": 0.9985902905464172,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 2,
+    "image_id": "smoke_synth_02_0000",
+    "rank": 3,
+    "target_confidence": 0.9988588094711304,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 3,
+    "image_id": "smoke_synth_03_0002",
+    "rank": 1,
+    "target_confidence": 0.9952774047851562,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 3,
+    "image_id": "smoke_synth_03_0000",
+    "rank": 2,
+    "target_confidence": 0.9957579970359802,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 3,
+    "image_id": "smoke_synth_03_0001",
+    "rank": 3,
+    "target_confidence": 0.9879569411277771,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 4,
+    "image_id": "smoke_synth_04_0002",
+    "rank": 1,
+    "target_confidence": 0.9989385008811951,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 4,
+    "image_id": "smoke_synth_04_0000",
+    "rank": 2,
+    "target_confidence": 0.9992395639419556,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 4,
+    "image_id": "smoke_synth_04_0001",
+    "rank": 3,
+    "target_confidence": 0.9995087385177612,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 5,
+    "image_id": "smoke_synth_05_0002",
+    "rank": 1,
+    "target_confidence": 0.997192919254303,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 5,
+    "image_id": "smoke_synth_05_0001",
+    "rank": 2,
+    "target_confidence": 0.9935264587402344,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 5,
+    "image_id": "smoke_synth_05_0000",
+    "rank": 3,
+    "target_confidence": 0.9899101853370667,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 6,
+    "image_id": "smoke_synth_06_0000",
+    "rank": 1,
+    "target_confidence": 0.9991580247879028,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 6,
+    "image_id": "smoke_synth_06_0001",
+    "rank": 2,
+    "target_confidence": 0.9995540976524353,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 6,
+    "image_id": "smoke_synth_06_0002",
+    "rank": 3,
+    "target_confidence": 0.9996763467788696,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 7,
+    "image_id": "smoke_synth_07_0001",
+    "rank": 1,
+    "target_confidence": 0.9994181394577026,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 7,
+    "image_id": "smoke_synth_07_0002",
+    "rank": 2,
+    "target_confidence": 0.9995785355567932,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 7,
+    "image_id": "smoke_synth_07_0000",
+    "rank": 3,
+    "target_confidence": 0.9987836480140686,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 8,
+    "image_id": "smoke_synth_08_0000",
+    "rank": 1,
+    "target_confidence": 0.9992864727973938,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 8,
+    "image_id": "smoke_synth_08_0002",
+    "rank": 2,
+    "target_confidence": 0.9968829154968262,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 8,
+    "image_id": "smoke_synth_08_0001",
+    "rank": 3,
+    "target_confidence": 0.9987541437149048,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 9,
+    "image_id": "smoke_synth_09_0001",
+    "rank": 1,
+    "target_confidence": 0.9984851479530334,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 9,
+    "image_id": "smoke_synth_09_0002",
+    "rank": 2,
+    "target_confidence": 0.998857855796814,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "random",
+    "class_id": 9,
+    "image_id": "smoke_synth_09_0000",
+    "rank": 3,
+    "target_confidence": 0.997734546661377,
+    "random_seed": 20261116
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 0,
+    "image_id": "smoke_synth_00_0002",
+    "rank": 1,
+    "target_confidence": 0.9883495569229126,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 0,
+    "image_id": "smoke_synth_00_0001",
+    "rank": 2,
+    "target_confidence": 0.9846656322479248,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 0,
+    "image_id": "smoke_synth_00_0000",
+    "rank": 3,
+    "target_confidence": 0.9602031111717224,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 1,
+    "image_id": "smoke_synth_01_0002",
+    "rank": 1,
+    "target_confidence": 0.9839484095573425,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 1,
+    "image_id": "smoke_synth_01_0000",
+    "rank": 2,
+    "target_confidence": 0.9791107773780823,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 1,
+    "image_id": "smoke_synth_01_0001",
+    "rank": 3,
+    "target_confidence": 0.8254843354225159,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 2,
+    "image_id": "smoke_synth_02_0001",
+    "rank": 1,
+    "target_confidence": 0.9996591806411743,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 2,
+    "image_id": "smoke_synth_02_0000",
+    "rank": 2,
+    "target_confidence": 0.9988588094711304,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 2,
+    "image_id": "smoke_synth_02_0002",
+    "rank": 3,
+    "target_confidence": 0.9985902905464172,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 3,
+    "image_id": "smoke_synth_03_0000",
+    "rank": 1,
+    "target_confidence": 0.9957579970359802,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 3,
+    "image_id": "smoke_synth_03_0002",
+    "rank": 2,
+    "target_confidence": 0.9952774047851562,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 3,
+    "image_id": "smoke_synth_03_0001",
+    "rank": 3,
+    "target_confidence": 0.9879569411277771,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 4,
+    "image_id": "smoke_synth_04_0001",
+    "rank": 1,
+    "target_confidence": 0.9995087385177612,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 4,
+    "image_id": "smoke_synth_04_0000",
+    "rank": 2,
+    "target_confidence": 0.9992395639419556,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 4,
+    "image_id": "smoke_synth_04_0002",
+    "rank": 3,
+    "target_confidence": 0.9989385008811951,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 5,
+    "image_id": "smoke_synth_05_0002",
+    "rank": 1,
+    "target_confidence": 0.997192919254303,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 5,
+    "image_id": "smoke_synth_05_0001",
+    "rank": 2,
+    "target_confidence": 0.9935264587402344,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 5,
+    "image_id": "smoke_synth_05_0000",
+    "rank": 3,
+    "target_confidence": 0.9899101853370667,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 6,
+    "image_id": "smoke_synth_06_0002",
+    "rank": 1,
+    "target_confidence": 0.9996763467788696,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 6,
+    "image_id": "smoke_synth_06_0001",
+    "rank": 2,
+    "target_confidence": 0.9995540976524353,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 6,
+    "image_id": "smoke_synth_06_0000",
+    "rank": 3,
+    "target_confidence": 0.9991580247879028,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 7,
+    "image_id": "smoke_synth_07_0002",
+    "rank": 1,
+    "target_confidence": 0.9995785355567932,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 7,
+    "image_id": "smoke_synth_07_0001",
+    "rank": 2,
+    "target_confidence": 0.9994181394577026,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 7,
+    "image_id": "smoke_synth_07_0000",
+    "rank": 3,
+    "target_confidence": 0.9987836480140686,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 8,
+    "image_id": "smoke_synth_08_0000",
+    "rank": 1,
+    "target_confidence": 0.9992864727973938,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 8,
+    "image_id": "smoke_synth_08_0001",
+    "rank": 2,
+    "target_confidence": 0.9987541437149048,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 8,
+    "image_id": "smoke_synth_08_0002",
+    "rank": 3,
+    "target_confidence": 0.9968829154968262,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 9,
+    "image_id": "smoke_synth_09_0002",
+    "rank": 1,
+    "target_confidence": 0.998857855796814,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 9,
+    "image_id": "smoke_synth_09_0001",
+    "rank": 2,
+    "target_confidence": 0.9984851479530334,
+    "random_seed": null
+  },
+  {
+    "schema_version": 1,
+    "pool_id": "runs/g2_smoke/20261115T084414_035006Z",
+    "method": "clip",
+    "class_id": 9,
+    "image_id": "smoke_synth_09_0000",
+    "rank": 3,
+    "target_confidence": 0.997734546661377,
+    "random_seed": null
+  }
+]

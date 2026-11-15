@@ -108,14 +108,14 @@ agent.md                    唯一规则、实验协议、内容框架
 progress.md                 唯一实际进度、证据与下一步
 configs/study.json          可执行参数；正式运行前须通过 G2 冻结
 code/toolkit.py             唯一 CLI，按阶段拆分辅助模块
-runs/<run_id>/              待生成：本次协议与产物，版本不混用
+runs/<run_id>/              本次协议与产物，版本不混用
   protocol.json             配置快照、代码摘要和冻结状态
   environment.json          Python/包版本、设备和运行环境
   manifests/                真实索引、候选图、排名、选择、任务状态
   images/ features/ models/ 图片、特征缓存、15 个分类器
   metrics/ figures/ logs/   预测、指标、图表、耗时和失败记录
   audits/                   标签抽查、复现试用、实际贡献记录
-shared/<run_id>/            待导出：供团队共享的小型结果、清单和产物索引
+shared/<run_id>/            供团队共享的小型结果、清单和产物索引
 report/                     待编写：报告正文与最终导出
 slides/                     待编写：展示材料
 ```
