@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "status": "success",
+  "proposal_hash": "8c39169ff204a9fe13ca019d57e6c26d76436094c777f5b8ac4f6737e1592b53",
+  "code_sha256": {
+    "a_protocol.py": "aaa89a6fa7b5cfeea130e1af2a89e32ded6d15153278079f750ab62a9b75c84a",
+    "a_runtime.py": "3088b46b577d204809a56a6c2556fbb5f55e1ca42bdafb1c249dcb488eac65e4",
+    "classifier.py": "2047e236c48cbaec3a7cdb777599e047c0ff04e7cf8a418cc0942ff369e86bc0",
+    "data_features.py": "61ec30afae7abdf005a47c6d27425cebf16692b8c58922ee5bd4c508e4ca27a6",
+    "evaluation.py": "198d516bf076237de7a170e4030ee54dcbb45dc2907eb02e83f67aa31638e43a",
+    "formal.py": "a11f2ce88daa3d1d2987f389c60bd497846b7a025f93a7df816790551b5d5909",
+    "selection.py": "bdf8ac7cb9868ac28e16c1b34f76486844daa0493a173517dcbb96527af6b0e3",
+    "smoke.py": "f70b3bb4cd0b72181b0fd804cd2da9d6992888436f864efe3ef13280a71a7989",
+    "toolkit.py": "c428d055a92f5bc6fa6d3c15a020ec9a587ce26672a9aa4ac5d1e4a8931fa825"
+  },
+  "smoke_report_sha256": "e5d9a778d0454be04e4d808f7296cd1e1bafaf1edafd6e3aa86a0511298238db",
+  "visual_review_sha256": "e7a672655f0b68cf83acb2291b98e9ee2f4b5064cfe8474658ad0ea77989ba7d",
+  "run_dir": "runs/g2_smoke/20261115T093625_435949Z",
+  "scope": "G2 engineering acceptance; formal pool quality and downstream gains remain unmeasured."
+}

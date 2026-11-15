@@ -2,7 +2,7 @@
 
 面向 20-shot 图像分类的合成数据增强工具：生成补充图片、选择样本、训练分类器，并评估真实测试效果。
 
-> 当前：正在推进 G3；正式入口和恢复检查已补齐，先重新验证并冻结 0.3 配置，再开始批量生成和训练。最终测试评估尚未开始，具体证据见 progress.md。
+> 当前：0.3 配置已重验冻结，正在推进 G3 正式生成与训练；最终测试评估尚未开始。具体证据与当前进度见 progress.md。
 
 ## 阅读入口
 
@@ -31,7 +31,7 @@
 
 依次阅读 agent.md 和 progress.md。[G1 环境检查摘要](shared/g1_environment/check.json) 保存当时的模型文件校验、实际推理结果及限制；当前代码及 G2 状态以 progress.md 为准。
 
-[G2 验收与开发集结果](shared/g2_smoke_20261115T084414_035006Z/check.json)包含五条件链路、缓存、冻结和重载证据；同目录保存真实划分、CLIP 分数、排名、选择及开发集预测。[样图 1](shared/g2_smoke_20261115T084414_035006Z/generation_classes_0_4.jpg) / [样图 2](shared/g2_smoke_20261115T084414_035006Z/generation_classes_5_9.jpg)仅供查看试跑输出，不能替代正式质量抽查或收益评估。
+[当前 G2 验收](shared/g2_smoke_20261115T093625_435949Z/check.json)及[部分批次恢复实测](shared/g2_smoke_20261115T093625_435949Z/partial_batch_resume.json)对应 0.3 代码和批处理配置；同目录保存划分、分数、排名、选择及开发集预测。[样图 1](shared/g2_smoke_20261115T093625_435949Z/generation_classes_0_4.jpg) / [样图 2](shared/g2_smoke_20261115T093625_435949Z/generation_classes_5_9.jpg)供查看试跑输出，正式质量抽查与收益评估仍待后续执行。此前的 G2 目录为版本历史。
 
 已在本机独立环境验证的命令（本轮模型核验使用完整本地缓存，以 HF_HUB_OFFLINE=1 离线执行）：
 

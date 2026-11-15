@@ -1,0 +1,30 @@
+{
+  "status": "success",
+  "image_id": "smoke_synth_01_0000",
+  "original_sha256": "339b2e2afc4116b97d587371fe6c69b6ec5f3cfa2b258967db1dec99f5400d28",
+  "regenerated_sha256": "339b2e2afc4116b97d587371fe6c69b6ec5f3cfa2b258967db1dec99f5400d28",
+  "existing_batch_members_unchanged": true,
+  "generated": 1,
+  "reused_verified": 29,
+  "generation": {
+    "status": "success",
+    "mode": "smoke",
+    "config_hash": "927a84fdfa586f8259079455e2bf2ad9f4ad2d4062f6009448327f6486108120",
+    "run_dir": "runs\\generation_smoke\\927a84fdfa58_balanced3",
+    "count": 30,
+    "generated": 1,
+    "reused_verified": 29,
+    "pipeline_load_seconds": 3.7544934999968973,
+    "batch_size": 4,
+    "warmup_seconds": 7.528874499999802,
+    "peak_cuda_allocated_bytes": 5330201088,
+    "stage_seconds": 26.563363299996126
+  },
+  "note": "One image/record moved to this audit's backup; full original batch regenerated and its other three images compared byte-for-byte.",
+  "source_audit": "runs/g2_smoke/20261115T092909_224669Z/audits/partial_batch_resume.json",
+  "source_audit_sha256": "9af03489d1c4eb0cff9147fb58fbb773c529a5c221787cbf6baaf51fce7d84b7",
+  "verified_generation_sources": {
+    "a_protocol.py": "aaa89a6fa7b5cfeea130e1af2a89e32ded6d15153278079f750ab62a9b75c84a",
+    "a_runtime.py": "3088b46b577d204809a56a6c2556fbb5f55e1ca42bdafb1c249dcb488eac65e4"
+  }
+}
