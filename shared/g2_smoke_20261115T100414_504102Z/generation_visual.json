@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "status": "reviewed",
+  "reviewer": "Codex",
+  "method": "Codex previously viewed these exact contact-sheet bytes; all 30 generated image hashes are unchanged after the post-checker-only revision. Single non-blinded engineering review.",
+  "candidate_manifest_sha256": "941fbcd8c098fad3eb041c65b83aa42ac75bb2d7e928868242f4aa28d9733524",
+  "classes": [
+    {
+      "class_id": 0,
+      "class_name": "airplane",
+      "reviewed": 3,
+      "recognizable_target": 3,
+      "uncertain": 0,
+      "usable_for_pipeline_trial": true,
+      "note": "Three recognizable aircraft; wing/engine geometry and markings show artifacts."
+    },
+    {
+      "class_id": 1,
+      "class_name": "automobile",
+      "reviewed": 3,
+      "recognizable_target": 3,
+      "uncertain": 0,
+      "usable_for_pipeline_trial": true,
+      "note": "Three recognizable cars; a stretched vehicle and illegible plates are retained."
+    },
+    {
+      "class_id": 2,
+      "class_name": "bird",
+      "reviewed": 3,
+      "recognizable_target": 3,
+      "uncertain": 0,
+      "usable_for_pipeline_trial": true,
+      "note": "Three recognizable birds; fine anatomy is not independently verified."
+    },
+    {
+      "class_id": 3,
+      "class_name": "cat",
+      "reviewed": 3,
+      "recognizable_target": 3,
+      "uncertain": 0,
+      "usable_for_pipeline_trial": true,
+      "note": "Three recognizable cats, including a tightly cropped face."
+    },
+    {
+      "class_id": 4,
+      "class_name": "deer",
+      "reviewed": 3,
+      "recognizable_target": 2,
+      "uncertain": 1,
+      "usable_for_pipeline_trial": true,
+      "note": "Two clear deer; the third is antelope-like and is conservatively marked uncertain. All three are retained."
+    },
+    {
+      "class_id": 5,
+      "class_name": "dog",
+      "reviewed": 3,
+      "recognizable_target": 3,
+      "uncertain": 0,
+      "usable_for_pipeline_trial": true,
+      "note": "Three recognizable dogs; local face and paw distortion is present."
+    },
+    {
+      "class_id": 6,
+      "class_name": "frog",
+      "reviewed": 3,
+      "recognizable_target": 3,
+      "uncertain": 0,
+      "usable_for_pipeline_trial": true,
+      "note": "Three recognizable frogs; limb details show distortion."
+    },
+    {
+      "class_id": 7,
+      "class_name": "horse",
+      "reviewed": 3,
+      "recognizable_target": 3,
+      "uncertain": 0,
+      "usable_for_pipeline_trial": true,
+      "note": "Three recognizable horses; leg placement is distorted in one image."
+    },
+    {
+      "class_id": 8,
+      "class_name": "ship",
+      "reviewed": 3,
+      "recognizable_target": 3,
+      "uncertain": 0,
+      "usable_for_pipeline_trial": true,
+      "note": "Three recognizable ships, including one monochrome image."
+    },
+    {
+      "class_id": 9,
+      "class_name": "truck",
+      "reviewed": 3,
+      "recognizable_target": 3,
+      "uncertain": 0,
+      "usable_for_pipeline_trial": true,
+      "note": "Three recognizable trucks; mechanical details and text are imperfect."
+    }
+  ],
+  "scope": "Check gross class/prompt mistakes for G2 only. No candidate removal; no label-precision or downstream-benefit claim. The planned two-person formal audit remains outstanding.",
+  "all_30_candidates_retained": true
+}

@@ -1,0 +1,9 @@
+{
+  "status": "success",
+  "samples": 30,
+  "all_image_sha256_unchanged": true,
+  "generation_core_hash": "f5fe23380653e2d0daa5194fa406ff8cfda562d8450387ed9dd0b73b9fcf4da6",
+  "source_protocol": "0.3",
+  "destination_protocol": "0.4",
+  "scope": "Same generator, sampling inputs and smoke image bytes; safety handling only. Old completed images still require per-file verification on adoption."
+}

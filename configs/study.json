@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "protocol_version": "0.4-draft",
-  "protocol_status": "draft",
+  "protocol_version": "0.4-frozen",
+  "protocol_status": "frozen",
   "run_id": "synthetic_v2",
   "dataset": {
     "name": "CIFAR10",
@@ -113,6 +113,10 @@
     "generation_seed_offset": 10000000
   },
   "gates": {
-    "g2_passed": false
+    "g2_passed": true,
+    "g2_evidence": {
+      "path": "shared/g2_smoke_20261115T100414_504102Z/g2_gate.json",
+      "sha256": "a00631dc6e2d95103c75a9787c3da431fe6ca7de0234d8115b19a05674be5bf3"
+    }
   }
 }
