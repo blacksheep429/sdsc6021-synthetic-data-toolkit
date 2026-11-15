@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "assessment": "G1 environment check",
-  "status": "partial",
-  "paused_at_user_request": true,
-  "utc": "2026-11-15T03:13:41.057201+00:00",
+  "assessment": "G1 environment and pretrained GPU inference check",
+  "status": "success",
+  "paused_after_g1_at_user_request": true,
+  "utc": "2026-11-15T06:13:20.429350+00:00",
   "python": "3.12.14",
   "platform": "Windows 11 x64",
   "project_venv_isolated": true,
@@ -39,7 +39,7 @@
       "sm_120"
     ],
     "matrix_check": "passed",
-    "seconds": 9.042193600002065
+    "seconds": 9.45482130000164
   },
   "checks": {
     "dependency_integrity": "passed",
@@ -49,20 +49,137 @@
       "passed": 6,
       "failed": 0
     },
-    "sd15_inference": "not_verified",
-    "clip_pretrained_inference": "not_verified",
-    "resnet_pretrained_inference": "not_verified"
+    "sd15_inference": "passed",
+    "clip_pretrained_inference": "passed",
+    "resnet_pretrained_inference": "passed"
   },
+  "reused_check_evidence": "Dependency check, imports and six protocol tests were already passed with identical package and source hashes; prior snapshot is preserved locally and in Git history.",
   "model_weights": {
-    "sd15": "incomplete_download",
-    "clip": "not_downloaded",
-    "resnet18": "not_downloaded"
+    "sd15": "verified_cached",
+    "clip": "verified_cached",
+    "resnet18": "verified_cached"
+  },
+  "weight_files": [
+    {
+      "model_id": "stable-diffusion-v1-5/stable-diffusion-v1-5",
+      "revision": "451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+      "file": "safety_checker/model.fp16.safetensors",
+      "bytes": 608018440,
+      "sha256": "08902f19b1cfebd7c989f152fc0507bef6898c706a91d666509383122324b511",
+      "official_full_sha256_match": true
+    },
+    {
+      "model_id": "stable-diffusion-v1-5/stable-diffusion-v1-5",
+      "revision": "451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+      "file": "text_encoder/model.fp16.safetensors",
+      "bytes": 246144864,
+      "sha256": "77795e2023adcf39bc29a884661950380bd093cf0750a966d473d1718dc9ef4e",
+      "official_full_sha256_match": true
+    },
+    {
+      "model_id": "stable-diffusion-v1-5/stable-diffusion-v1-5",
+      "revision": "451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+      "file": "unet/diffusion_pytorch_model.fp16.safetensors",
+      "bytes": 1719125304,
+      "sha256": "c83908253f9a64d08c25fc90874c9c8aef9a329ce1ca5fb909d73b0c83d1ea21",
+      "official_full_sha256_match": true
+    },
+    {
+      "model_id": "stable-diffusion-v1-5/stable-diffusion-v1-5",
+      "revision": "451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+      "file": "vae/diffusion_pytorch_model.fp16.safetensors",
+      "bytes": 167335342,
+      "sha256": "4fbcf0ebe55a0984f5a5e00d8c4521d52359af7229bb4d81890039d2aa16dd7c",
+      "official_full_sha256_match": true
+    },
+    {
+      "model_id": "openai/clip-vit-base-patch32",
+      "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "file": "pytorch_model.bin",
+      "bytes": 605247071,
+      "sha256": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f",
+      "official_full_sha256_match": true
+    },
+    {
+      "model_id": "torchvision/resnet18",
+      "weights": "IMAGENET1K_V1",
+      "file": "resnet18-f37072fd.pth",
+      "bytes": 46830571,
+      "sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+      "official_filename_sha256_prefix_match": true
+    }
+  ],
+  "generation": {
+    "status": "success",
+    "mode": "smoke",
+    "config_hash": "7262fc0d4f6214038894e99864f079d1219f718130a26932c1336dc243d90566",
+    "run_dir": "runs\\doctor\\20261115T061320_367141Z\\generation",
+    "count": 1,
+    "generated": 1,
+    "reused_verified": 0,
+    "pipeline_load_seconds": 4.370308300000033,
+    "stage_seconds": 12.842210599999817
+  },
+  "generation_sample": {
+    "schema_version": 1,
+    "image_id": "synth_00_0000",
+    "class_id": 0,
+    "class_name": "airplane",
+    "source": "synthetic",
+    "relative_path": "images/00/0000.png",
+    "generation_seed": 20261115,
+    "prompt": "a photo of a airplane.",
+    "status": "success",
+    "config_hash": "7262fc0d4f6214038894e99864f079d1219f718130a26932c1336dc243d90566",
+    "sha256": "af3f7638e8070d365f4e97602d39cdfe981e59fad76e4179c3f9d334da8d103c",
+    "seconds": 8.36772159999964,
+    "mode": "smoke",
+    "local_image": "runs/doctor/20261115T061320_367141Z/generation/images/00/0000.png"
+  },
+  "visual_check": {
+    "reviewer": "Codex visual inspection",
+    "image_id": "synth_00_0000",
+    "sha256": "af3f7638e8070d365f4e97602d39cdfe981e59fad76e4179c3f9d334da8d103c",
+    "observation": "Airplane is recognizable; conspicuous structural distortion is present.",
+    "scope": "G1 functional verification only; candidate-pool quality and downstream usefulness remain unevaluated."
+  },
+  "models": {
+    "clip": {
+      "model_id": "openai/clip-vit-base-patch32",
+      "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "probabilities": {
+        "airplane": 0.9965991377830505,
+        "automobile": 0.00044567626900970936,
+        "bird": 0.0013453650753945112,
+        "cat": 6.070683866710169e-06,
+        "deer": 4.948714922647923e-05,
+        "dog": 2.4132285034283996e-05,
+        "frog": 6.134866453066934e-06,
+        "horse": 7.624694990226999e-05,
+        "ship": 0.0013281602878123522,
+        "truck": 0.00011960761912632734
+      },
+      "top_class": "airplane",
+      "seconds": 0.8525731999980053
+    },
+    "resnet": {
+      "architecture": "resnet18",
+      "weights": "ResNet18_Weights.IMAGENET1K_V1",
+      "shape": [
+        1,
+        512
+      ],
+      "parameters_frozen": true,
+      "batchnorm_unchanged": true,
+      "seconds": 0.22956390000035753
+    }
   },
   "config_hash": "7262fc0d4f6214038894e99864f079d1219f718130a26932c1336dc243d90566",
   "protocol_status": "draft",
   "g2_passed": false,
   "training_performed": false,
   "formal_generation_performed": false,
+  "verification_code_commit": "bfee2872cbfaa1e85de7ca3c2a4efe983b2dd5b7",
   "verification_source_sha256": {
     "a_protocol.py": "0e3018701cbfc9907c19505d3d727f9458e6385baf0f9ff402aa66ab1733c03f",
     "a_runtime.py": "be44f4ec0a0bef3f6738859a928ce34283b652410a95e8e8eef249edfc7418fe",
@@ -71,9 +188,13 @@
   },
   "verification_worktree_was_dirty": true,
   "local_evidence": {
-    "cuda": "runs/doctor/20261115T031341_003079Z/report.json",
-    "logs": "runs/environment_check/",
-    "local_dependency_reuse": "runs/_cache/local_environment_reuse.json"
+    "doctor": "runs/doctor/20261115T061320_367141Z/report.json",
+    "prior_partial_snapshot": "runs/environment_check/shared_partial_at_bfee287.json",
+    "dependency_and_protocol_logs": "runs/environment_check/",
+    "download_verification": "runs/_cache/downloads/g1_verified_mirrors/summary.json",
+    "resnet_independent": "runs/environment_check/resnet_independent_20261115/report.json"
   },
-  "next_step_after_user_resume": "Complete pinned model downloads, then run doctor --models; G1 has not fully passed."
+  "download_note": "Process-only physical-interface and DNS routing; no system proxy changes. SD fp16 files reconstructed from SHA-verified official fp32 bytes and the official fp16 serialization headers, mapping legacy attention parameter aliases where needed; every reconstructed file matches the pinned official fp16 file's full SHA-256. CLIP mirror matches the full pinned official SHA-256. Transport scripts and caches remain local.",
+  "timing_note": "One un-warmed G1 image; timing is not an estimate of the full 2000-image run. Downloads and prior retries are excluded from cached inference timing.",
+  "next_step_after_user_resume": "G2: integrate a small five-condition pipeline and freeze remaining protocol parameters before formal generation."
 }

@@ -2,7 +2,7 @@
 
 面向 20-shot 图像分类的合成数据增强工具：生成补充图片、选择样本、训练分类器，并评估真实测试效果。
 
-> 当前：A 的 Python/CUDA、依赖完整性和模型库导入已通过检查；模型权重下载未完成，实际模型推理尚未验证。按用户要求暂停，G1 仅部分通过；没有正式实验结果。
+> 当前：G1 环境与最小推理核验已通过，按用户要求暂停。正式数据生成、分类器训练和下游评估尚未开始；具体证据与下一步见 progress.md。
 
 ## 阅读入口
 
@@ -29,15 +29,16 @@
 
 ## 开始工作
 
-依次阅读 agent.md 和 progress.md。[环境检查摘要](shared/g1_environment/check.json) 保存已验证项与未验证项。当前 A/Codex 已暂停，恢复后先补齐权重并完成模型实测，再推进 G2。
+依次阅读 agent.md 和 progress.md。[环境检查摘要](shared/g1_environment/check.json) 保存模型文件校验、实际推理结果及限制。当前 A/Codex 已暂停；恢复后的下一关为 G2 完整试跑与协议冻结。
 
-已在本机独立环境验证的命令（默认只检查 CUDA，不下载模型）：
+已在本机独立环境验证的命令（本轮模型核验使用完整本地缓存，以 HF_HUB_OFFLINE=1 离线执行）：
 
 ```powershell
 .\.venv\Scripts\python.exe code/toolkit.py doctor
+.\.venv\Scripts\python.exe code/toolkit.py doctor --models
 .\.venv\Scripts\python.exe -m unittest discover -s code -p test_a_protocol.py -v
 ```
 
 环境使用 Python 3.12.14。重建时用 Python 3.12 创建 .venv，再依次安装 requirements-gpu.txt（官方 cu128 索引）和 requirements.txt（其余固定版本）；pip 命令加 --disable-pip-version-check。本机安装曾复用已有 CUDA 分发包，详细复制和校验记录保留在本地 runs/_cache/。
 
-`doctor --models` 会下载并核验 SD1.5、CLIP 和 ResNet；本轮未完成该项。完整五条件 smoke、选择、特征和训练等阶段尚未集成，见 agent.md。
+`doctor --models` 检查 SD1.5 出图、CLIP 打分与冻结 ResNet 特征；首次缺少缓存时需要下载权重。G1 仅证明模型能运行，候选质量与增强收益仍需后续评估。完整五条件 smoke、选择、特征和训练等阶段尚未集成，见 agent.md。
