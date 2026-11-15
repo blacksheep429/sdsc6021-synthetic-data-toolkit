@@ -104,6 +104,12 @@ Costs must distinguish downloading/loading, warm-up, generation, CLIP scoring, f
 
 The planned candidate audit samples ten generated candidates per class for two independent annotators, with CLIP scores hidden. The planned non-author trial records task completion, time and assistance. Neither activity has been completed at this draft stage.
 
+### 4.1 B-side independent training-artifact review
+
+A separate CPU implementation replayed the frozen 0.4 experiment inputs and all 15 head optimizations, without changing the sealed run. It verified the official training pixels/labels and class-wise split indices, all 3,001 indexed bundle files, and all feature ID/class mappings. The maximum replayed head-weight error was 4.77e-7 (predeclared tolerance 1e-6), and all 3,000 saved training-reference predictions agreed.
+
+Re-extracting all 598 real images and their 2,392 views left the frozen backbone and BatchNorm state unchanged. However, the CPU features differed from the sealed CUDA features by up to 2.01e-4, exceeding the strict 1e-5 absolute threshold. This finding is retained rather than relaxing the threshold. Minimum cosine similarity was 0.99999970, and replacing the base-view features changed none of the 3,000 training-reference predictions. These observations do not establish agreement on the unseen test set. CPU/CUDA numerical behavior is a possible explanation, not a confirmed cause; a matched-environment diagnostic remains for A. Full environment, initial failures and per-model evidence appear in [the B review](B_v04_review.md) and [shared review records](../shared/b_v04_review/README.md). The work was performed with Codex assistance and does not replace a human audit.
+
 ## 5. Limitations and interpretation
 
 The study covers one dataset, one real-label budget, one generator and one feature backbone. The three seeds share one synthetic pool and therefore do not measure generation-pool variability. The models contain external pretraining information; the experiment is not learning classification from 200 images without prior knowledge. Generated class labels are inferred from prompts and may be incorrect. Ranking can reduce diversity or prefer images unlike CIFAR test examples, but those mechanisms require additional evidence and must not be inferred from an accuracy difference alone.

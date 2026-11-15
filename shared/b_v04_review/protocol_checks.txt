@@ -1,0 +1,37 @@
+test_cache_fingerprint_is_order_independent_but_parameter_sensitive (test_a_protocol.ProtocolTests.test_cache_fingerprint_is_order_independent_but_parameter_sensitive) ... ok
+test_config_rejects_changed_class_order_and_unfrozen_bn (test_a_protocol.ProtocolTests.test_config_rejects_changed_class_order_and_unfrozen_bn) ... ok
+test_full_generation_rejects_draft_and_unfrozen_classifier (test_a_protocol.ProtocolTests.test_full_generation_rejects_draft_and_unfrozen_classifier) ... ok
+test_paths_cannot_escape_their_run_root (test_a_protocol.ProtocolTests.test_paths_cannot_escape_their_run_root) ... ok
+test_plan_preserves_paired_matrix_and_unique_candidate_rng (test_a_protocol.ProtocolTests.test_plan_preserves_paired_matrix_and_unique_candidate_rng) ... ok
+test_resume_rejects_tampered_image_and_mismatched_config (test_a_protocol.ProtocolTests.test_resume_rejects_tampered_image_and_mismatched_config) ... ok
+test_balanced_smoke_never_uses_the_formal_generation_seeds (test_g2.ScientificChecks.test_balanced_smoke_never_uses_the_formal_generation_seeds) ... ok
+test_development_labels_are_within_the_same_twenty_shot_sample (test_g2.ScientificChecks.test_development_labels_are_within_the_same_twenty_shot_sample) ... ok
+test_feature_key_invalidates_image_views_but_not_head_learning_rate (test_g2.ScientificChecks.test_feature_key_invalidates_image_views_but_not_head_learning_rate) ... ok
+test_frozen_flag_cannot_replace_matching_g2_evidence (test_g2.ScientificChecks.test_frozen_flag_cannot_replace_matching_g2_evidence) ... ok
+test_mixed_weight_does_not_change_when_synthetic_rows_or_views_repeat (test_g2.ScientificChecks.test_mixed_weight_does_not_change_when_synthetic_rows_or_views_repeat) ... ok
+test_paired_real_sampling_keeps_all_classes_in_every_update (test_g2.ScientificChecks.test_paired_real_sampling_keeps_all_classes_in_every_update) ... ok
+test_selection_is_equal_sized_nested_and_tie_order_independent (test_g2.ScientificChecks.test_selection_is_equal_sized_nested_and_tie_order_independent) ... ok
+test_selection_rejects_scores_from_another_image (test_g2.ScientificChecks.test_selection_rejects_scores_from_another_image) ... ok
+test_serialized_features_without_successful_freezing_proof_are_rejected (test_g2.ScientificChecks.test_serialized_features_without_successful_freezing_proof_are_rejected) ... ok
+test_flagged_image_requires_a_hash_bound_review_and_cache_keeps_that_proof (test_g3.FormalChecks.test_flagged_image_requires_a_hash_bound_review_and_cache_keeps_that_proof) ... ok
+[train] main real_only, seed=0, updates=2
+[train] main random_50, seed=0, updates=2
+[train] main clip_50, seed=0, updates=2
+[train] main random_150, seed=0, updates=2
+[train] main clip_150, seed=0, updates=2
+[train] main real_only, seed=0, updates=2
+[train] main random_50, seed=0, updates=2
+[train] main clip_50, seed=0, updates=2
+[train] main random_150, seed=0, updates=2
+[train] main clip_150, seed=0, updates=2
+[train] main real_only, seed=0, updates=2
+test_formal_head_resume_checks_inputs_outputs_and_checkpoint_integrity (test_g3.FormalChecks.test_formal_head_resume_checks_inputs_outputs_and_checkpoint_integrity) ... ok
+test_image_adoption_only_allows_post_generation_policy_changes (test_g3.FormalChecks.test_image_adoption_only_allows_post_generation_policy_changes) ... ok
+test_original_batches_are_stable_for_partial_resume (test_g3.FormalChecks.test_original_batches_are_stable_for_partial_resume) ... ok
+test_statistics_pair_by_seed_and_use_sample_standard_deviation (test_g3.FormalChecks.test_statistics_pair_by_seed_and_use_sample_standard_deviation) ... ok
+test_statistics_reject_missing_or_duplicate_conditions (test_g3.FormalChecks.test_statistics_reject_missing_or_duplicate_conditions) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 2.702s
+
+OK
