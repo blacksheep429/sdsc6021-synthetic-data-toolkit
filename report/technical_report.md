@@ -122,4 +122,6 @@ The practical recommendation must follow the eventual test and cost results. If 
 
 The user directs work package A. Codex implemented and executed the current engineering pipeline under that authorization. B/C/D human ownership, independent verification, final report editing, presentation work and attendance must be recorded from actual contributions. No teammate is credited with code, experiments or annotations solely because a role was proposed.
 
+The merged repository records the B-side independent CPU review submitted by GitHub account careless-Snow (with declared Codex assistance) and the C-side stored-selection and simulated-statistics audits submitted by blacksheep429. These are additional review artifacts; they did not replace the sealed training inputs/models or the completed G4 evaluation. Real names, student IDs and their mapping to team members remain to be confirmed. C's independent analysis of actual G4 predictions remains pending.
+
 This draft will be updated from generated G3/G4 records. Named contribution details, final findings, user-trial results and presentation evidence remain to be supplied.

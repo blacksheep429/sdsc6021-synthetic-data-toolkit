@@ -54,3 +54,19 @@ Pending:
 - CLIP zero-shot evaluation.
 - Independent recalculation using official predictions.
 - Final figures and cost analysis.
+
+## Integration and current handoff
+
+PR #2 is integrated into the main branch. A reran both scripts successfully; the shared [integration check](audits/team_merge_checks.json) records the verification. The statistics script was normalized to repository LF line endings without changing its logic. The original C execution environment and limits above remain as reported.
+
+G4 has since completed on A's GPU. C's next step is independent analysis of the [official predictions](g4/README.md), followed by figures and interpretation. The pending G4 items above describe the original submission time.
+
+The selection audit expects training_bundle.zip in its working directory. From the repository root, with the G3 asset downloaded:
+
+```powershell
+$projectRoot = (Get-Location).Path
+Push-Location (Join-Path $projectRoot 'deliverables/g3_synthetic_v2')
+python (Join-Path $projectRoot 'code/audits/02_clip_audit.py')
+Pop-Location
+python code/audits/03_stats_audit.py
+```

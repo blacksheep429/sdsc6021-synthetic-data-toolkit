@@ -10,6 +10,7 @@
 - [progress.md](progress.md)：唯一实际进度，包含证据、待办、阻塞和成员分工。
 - [队友接手清单](progress.md#队友现在需要做什么)：B/C/D 现在需要取什么、完成什么，以及哪些任务使用 A 的 GPU 电脑。
 - [G4 正式预测与运行记录](shared/synthetic_v2/g4/README.md)：C 从这里下载实际测试预测，完成独立重算和图表。
+- [B 独立复核](shared/b_v04_review/README.md)与 [C 选择/统计规则审计](shared/synthetic_v2/c_independent_audit.md)：已合并的队友成果；B 数值差异和原阈值保留，C 的真实预测分析继续使用 G4 包。
 - [团队分工](分工.md)：A–D 工作包及必须交出的产物；具体成员认领和实际完成情况仍以 progress.md 为准。
 
 本文件只用于入门导航；详细协议只维护在 agent.md，运行状态只维护在 progress.md。

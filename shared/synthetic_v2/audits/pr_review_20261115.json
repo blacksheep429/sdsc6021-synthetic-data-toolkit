@@ -3,7 +3,7 @@
   "date": "2026-11-15",
   "reviewer": "Codex on A machine under user direction",
   "formal_evaluation_source_commit": "26e107feba6c4c4c5f447f84cada707e140d738c",
-  "pull_requests_merged": false,
+  "pull_requests_merged": true,
   "prs": [
     {
       "number": 1,
@@ -51,7 +51,10 @@
         "Stored-record selection consistency; no independent CLIP re-inference or regeneration of the random permutation",
         "Statistics script validates formulas using simulated data; C analysis of actual G4 predictions remains pending"
       ],
-      "changes_included_in_g4": false
+      "changes_included_in_g4": false,
+      "integration_status": "merged_into_main",
+      "merged": true,
+      "merge_commit_sha": "39d051e44dc4a529d9dd2f93f269be0c55e6aa5d"
     },
     {
       "number": 3,
@@ -60,7 +63,7 @@
       "head_sha": "b2e0becb2f3247d0324d0984ebf06be5e9b5906c",
       "role_in_submission": "B",
       "state_when_checked": "open",
-      "merged": false,
+      "merged": true,
       "changes_included_in_g4": false,
       "review_scope": "Current file list, independent review script, reported summary/evidence and documentation; full B script not re-executed in its separate CPU environment",
       "reported_by_B": {
@@ -90,8 +93,13 @@
         "New review tool is under code/reviews; top-level frozen experimental sources unchanged",
         "Before merging, reconcile shared progress/report edits with newly completed G4 and identify contributors by GitHub/name rather than chat-local pronouns",
         "Keep B original thresholds, first failures and stated limits; retain evidence and Codex assistance attribution"
-      ]
+      ],
+      "integration_status": "merged_into_main",
+      "merge_commit_sha": "6f9f3dcf81b3e07b6558a77238f0ac5b9bfacf58"
     }
   ],
-  "latest_checked_utc": "2026-11-15T13:56:21.257302+00:00"
+  "latest_checked_utc": "2026-11-15T13:56:21.257302+00:00",
+  "integration_utc": "2026-11-15T14:24:38.260019+00:00",
+  "integration_check": "team_merge_checks.json",
+  "integration_note": "User requested merge; local Git merge commits preserve both original PR heads. B progress/report overlaps reconciled with completed G4; original numerical evidence unchanged. C stats script line endings normalized to repository LF policy, no logic changed."
 }

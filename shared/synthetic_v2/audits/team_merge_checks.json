@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "status": "success",
+  "checked_utc": "2026-11-15T14:22:53.135855+00:00",
+  "pr_heads": {
+    "2": "4338cf5ab67cd14ee34e7a1a656cfd03a5ed2316",
+    "3": "b2e0becb2f3247d0324d0984ebf06be5e9b5906c"
+  },
+  "checks": [
+    {
+      "check": "protocol_tests",
+      "exit_code": 0,
+      "log_sha256": "c17c313a5a9c652b1d9c65e92444d554eca092c8039c7c44ffc41e4b6d2e1d83"
+    },
+    {
+      "check": "c_selection_audit",
+      "exit_code": 0,
+      "log_sha256": "b31189869e069b3aeef4bf743cd797ae9db10322852798cb28e2185ff18b34c4"
+    },
+    {
+      "check": "c_statistics_audit",
+      "exit_code": 0,
+      "log_sha256": "0a5f3fabfac9306804e4189b7b44137c813b490737365f72b3576c97bc2b4cd0"
+    }
+  ],
+  "protocol_test_count": 21,
+  "b_review_script_syntax_valid": true,
+  "b_original_numerical_evidence_bytes_preserved": [
+    {
+      "path": "shared/b_v04_review/initial_failures.json",
+      "sha256": "e1ab270cf751ff752b4daa8d358c54921ef13709bec791059fe1954d2e1527dd"
+    },
+    {
+      "path": "shared/b_v04_review/real_feature_comparisons.json",
+      "sha256": "171f118a2321563712b28c54beed2232270032ce84af7d6691ef241a7a0a4fb4"
+    },
+    {
+      "path": "shared/b_v04_review/review.json",
+      "sha256": "e38530003516e009d897d8a7198250107ac8d25c7078ac7dff053b258e62489f"
+    },
+    {
+      "path": "shared/b_v04_review/summary.json",
+      "sha256": "cddb90f35c6aecbaf04ed075d31c8c3eadba605ba826c52a0edbbfef4ea1e55a"
+    }
+  ],
+  "frozen_experimental_sources_config_and_model_seal_unchanged": true,
+  "all_16_official_prediction_files_sha256_unchanged": true,
+  "g4_report_sha256": "294351fef92936fcd3a379c3647b4150e96dcd672fbcd3dea6f49ab42af18e9d",
+  "g4_rerun": false,
+  "b_full_cpu_review_rerun": false,
+  "integration_scope": "Standalone review tools and evidence; reconciled progress/report, kept original B failed threshold and added limited A diagnosis; no training or evaluation setting changed."
+}
