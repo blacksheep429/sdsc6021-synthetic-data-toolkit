@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "completed_with_feature_numerical_finding",
+  "model_count": 15,
+  "optimizer_updates_replayed": 7500,
+  "indexed_files_verified": 3001,
+  "prediction_checks": 3000,
+  "prediction_changes_on_recomputed_features": 0,
+  "head_weight_max_abs_error": 4.76837158203125e-07,
+  "head_logit_max_abs_error": 7.152557373046875e-07,
+  "original_machine_reload_logit_hash_matches": 0,
+  "feature_max_abs_error": 0.0002012699842453003,
+  "feature_threshold": 1e-05,
+  "strict_feature_numeric_match": false,
+  "official_test_labels_read": false,
+  "sealed_input_unchanged": true,
+  "protocol_checks_passed": 21
+}

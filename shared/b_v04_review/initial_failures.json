@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "failures": [
+    {
+      "status": "failed",
+      "error_type": "ValueError",
+      "error": "Independent CPU/GPU real-feature mismatch",
+      "official_test_labels_read": false
+    },
+    {
+      "status": "failed",
+      "error_type": "ValueError",
+      "error": "Independent CPU/GPU real-feature mismatch: max_abs_error=0.0002012699842453003",
+      "official_test_labels_read": false
+    }
+  ],
+  "disposition": "Kept strict 1e-5 feature threshold; numerical mismatch remains an open finding. No threshold was widened and no frozen model/cache was modified."
+}
