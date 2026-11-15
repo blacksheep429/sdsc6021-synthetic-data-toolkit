@@ -1,0 +1,40 @@
+# 实验产物：图片、特征、模型和逐次运行记录保存在 runs/，不提交到 Git
+runs/
+*.npy
+*.npz
+
+# 模型权重
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+env/
+venv/
+
+# 模型缓存（2-5 GB，放在项目里的前提是这里挡住它）
+.hf_cache/
+
+# 本机课程材料与资料摘录，不属于团队项目源码
+DSC6021_Final_Project_总结.md
+*.pdf
+# 项目自己的最终报告 PDF 可以作为交付文件共享
+!report/*.pdf
+
+# 本机凭据；仅允许无真实凭据的示例文件
+.env
+.env.*
+!.env.example
+
+# 杂项
+*.log
+Thumbs.db
+.DS_Store
+~$*
+.vscode/
+.idea/
