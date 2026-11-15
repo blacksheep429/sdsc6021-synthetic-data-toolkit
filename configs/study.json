@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "protocol_version": "0.1-draft",
+  "protocol_status": "draft",
+  "run_id": "synthetic_v1",
+  "dataset": {
+    "name": "CIFAR10",
+    "classes": ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"],
+    "real_per_class": 20,
+    "split_seeds": [0, 1, 2]
+  },
+  "generation": {
+    "model_id": "stable-diffusion-v1-5/stable-diffusion-v1-5",
+    "revision": "451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+    "variant": "fp16",
+    "dtype": "float16",
+    "width": 512,
+    "height": 512,
+    "scheduler": "DPMSolverMultistepScheduler",
+    "solver_order": 2,
+    "algorithm_type": "dpmsolver++",
+    "use_karras_sigmas": false,
+    "steps": 20,
+    "guidance_scale": 6.0,
+    "prompt_template": "a photo of a {class_name}.",
+    "negative_prompt": "",
+    "candidates_per_class": 200,
+    "seed_base": 20261115,
+    "generator_device": "cpu"
+  },
+  "selection": {"sizes": [50, 150], "random_seed": 20261116},
+  "clip": {
+    "model_id": "openai/clip-vit-base-patch32",
+    "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+    "text_template": "a photo of a {class_name}."
+  },
+  "classifier": {
+    "architecture": "resnet18",
+    "weights": "IMAGENET1K_V1",
+    "freeze_backbone": true,
+    "freeze_batchnorm": true,
+    "train_views": 4,
+    "synthetic_loss_weight": 0.5,
+    "hyperparameters": null
+  },
+  "gates": {"g2_passed": false}
+}

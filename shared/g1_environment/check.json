@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "assessment": "G1 environment check",
+  "status": "partial",
+  "paused_at_user_request": true,
+  "utc": "2026-11-15T03:13:41.057201+00:00",
+  "python": "3.12.14",
+  "platform": "Windows 11 x64",
+  "project_venv_isolated": true,
+  "packages": {
+    "torch": "2.9.1+cu128",
+    "torchvision": "0.24.1+cu128",
+    "diffusers": "0.35.2",
+    "transformers": "4.57.6",
+    "accelerate": "1.15.0",
+    "numpy": "2.5.4",
+    "pillow": "13.0.0",
+    "safetensors": "0.8.0",
+    "huggingface-hub": "0.36.2",
+    "hf-xet": "1.8.0",
+    "ftfy": "6.3.1",
+    "wcwidth": "0.8.2"
+  },
+  "cuda": {
+    "torch": "2.9.1+cu128",
+    "cuda_runtime": "12.8",
+    "device": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+    "capability": [
+      12,
+      0
+    ],
+    "compiled_architectures": [
+      "sm_70",
+      "sm_75",
+      "sm_80",
+      "sm_86",
+      "sm_90",
+      "sm_100",
+      "sm_120"
+    ],
+    "matrix_check": "passed",
+    "seconds": 9.042193600002065
+  },
+  "checks": {
+    "dependency_integrity": "passed",
+    "model_library_imports": "passed",
+    "cuda_matrix_operation": "passed",
+    "protocol_tests": {
+      "passed": 6,
+      "failed": 0
+    },
+    "sd15_inference": "not_verified",
+    "clip_pretrained_inference": "not_verified",
+    "resnet_pretrained_inference": "not_verified"
+  },
+  "model_weights": {
+    "sd15": "incomplete_download",
+    "clip": "not_downloaded",
+    "resnet18": "not_downloaded"
+  },
+  "config_hash": "7262fc0d4f6214038894e99864f079d1219f718130a26932c1336dc243d90566",
+  "protocol_status": "draft",
+  "g2_passed": false,
+  "training_performed": false,
+  "formal_generation_performed": false,
+  "verification_source_sha256": {
+    "a_protocol.py": "0e3018701cbfc9907c19505d3d727f9458e6385baf0f9ff402aa66ab1733c03f",
+    "a_runtime.py": "be44f4ec0a0bef3f6738859a928ce34283b652410a95e8e8eef249edfc7418fe",
+    "test_a_protocol.py": "c8472a78ce3c7b7e3114788b2c979b58d6d52c451460b6f6e57e829d1fe249a2",
+    "toolkit.py": "96f76a0aada9df7b8d7592919be4efdd33727047b4ce601fbb6909ffb5e3965e"
+  },
+  "verification_worktree_was_dirty": true,
+  "local_evidence": {
+    "cuda": "runs/doctor/20261115T031341_003079Z/report.json",
+    "logs": "runs/environment_check/",
+    "local_dependency_reuse": "runs/_cache/local_environment_reuse.json"
+  },
+  "next_step_after_user_resume": "Complete pinned model downloads, then run doctor --models; G1 has not fully passed."
+}
