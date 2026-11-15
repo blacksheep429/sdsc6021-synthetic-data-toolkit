@@ -13,7 +13,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from a_protocol import (ROOT, CLASSES, atomic_json, candidate_plan, config_hash,
+from a_protocol import (ROOT, CLASSES, atomic_json, candidate_plan, class_texts, config_hash,
                         file_hash, inside, require_g2, verified_item)
 
 
@@ -83,23 +83,31 @@ def load_pipeline(config: dict):
     return pipe
 
 
-def generate(config: dict, *, smoke: bool, limit: int = 1, run_dir: Path | None = None) -> dict:
+def generate(config: dict, *, smoke: bool, limit: int = 1, per_class: int | None = None,
+             run_dir: Path | None = None) -> dict:
     configure_caches()
     if not smoke:
         require_g2(config)
-    elif not 1 <= limit <= 10:
+    elif per_class is not None and not 1 <= per_class <= 3:
+        raise ValueError("Balanced smoke supports 1-3 images per class")
+    elif per_class is None and not 1 <= limit <= 10:
         raise ValueError("G1 smoke must request between 1 and 10 images")
     fingerprint = config_hash(config)
     if run_dir is None:
-        relative = f"generation_smoke/{fingerprint[:12]}" if smoke else config["run_id"]
+        relative = f"generation_smoke/{fingerprint[:12]}_balanced{per_class}" if smoke and per_class else (f"generation_smoke/{fingerprint[:12]}" if smoke else config["run_id"])
         run_dir = inside(ROOT / "runs", relative)
+    items = candidate_plan(config, smoke_per_class=per_class) if smoke and per_class else (candidate_plan(config)[:limit] if smoke else candidate_plan(config))
+    requested = [item["image_id"] for item in items]
     run_dir.mkdir(parents=True, exist_ok=True)
     protocol_path = run_dir / "protocol.json"
     if protocol_path.exists():
         prior = json.loads(protocol_path.read_text(encoding="utf-8"))
         if prior["config_hash"] != fingerprint or prior["mode"] != ("smoke" if smoke else "main"):
             raise ValueError("Run directory belongs to a different protocol or mode")
-    atomic_json(protocol_path, {"config_hash": fingerprint, "mode": "smoke" if smoke else "main", "config": config})
+        if prior.get("requested_image_ids", requested) != requested:
+            raise ValueError("Requested generation subset changed; use a different smoke directory")
+    atomic_json(protocol_path, {"config_hash": fingerprint, "mode": "smoke" if smoke else "main", "config": config,
+                                "requested_image_ids": requested})
     current_environment = environment()
     environment_path = run_dir / "environment.json"
     if environment_path.exists():
@@ -113,13 +121,14 @@ def generate(config: dict, *, smoke: bool, limit: int = 1, run_dir: Path | None 
             raise ValueError("Generation code/package versions changed; preserve this run and use a new run directory")
     else:
         atomic_json(environment_path, current_environment)
-    items = candidate_plan(config)[:limit] if smoke else candidate_plan(config)
     records, todo = [], []
     for item in items:
         record = verified_item(run_dir, item, fingerprint)
         (records if record else todo).append(record if record else item)
     reused = len(records)
     load_seconds = 0.0
+    warmup_seconds = 0.0
+    peak_memory = 0
     stage_start = time.perf_counter()
     if todo:
         import numpy as np
@@ -131,6 +140,16 @@ def generate(config: dict, *, smoke: bool, limit: int = 1, run_dir: Path | None 
         load_seconds = time.perf_counter() - start
         gen = config["generation"]
         try:
+            torch.cuda.reset_peak_memory_stats()
+            if gen.get("warmup_steps", 0):
+                start = time.perf_counter()
+                with torch.inference_mode():
+                    pipe(items[0]["prompt"], negative_prompt=gen["negative_prompt"],
+                         num_inference_steps=gen["warmup_steps"], guidance_scale=gen["guidance_scale"],
+                         width=gen["width"], height=gen["height"],
+                         generator=torch.Generator(device="cpu").manual_seed(gen["seed_base"] - 1))
+                torch.cuda.synchronize()
+                warmup_seconds = time.perf_counter() - start
             for item in todo:
                 print(f"[generate] {item['image_id']} seed={item['generation_seed']}", flush=True)
                 torch.cuda.synchronize()
@@ -156,8 +175,10 @@ def generate(config: dict, *, smoke: bool, limit: int = 1, run_dir: Path | None 
                               seconds=time.perf_counter() - start, mode="smoke" if smoke else "main")
                 atomic_json(inside(run_dir, f"manifests/items/{item['image_id']}.json"), record)
                 records.append(record)
+            peak_memory = torch.cuda.max_memory_allocated()
         except Exception as exc:
-            atomic_json(run_dir / "generation_failure.json", {
+            stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S_%fZ")
+            atomic_json(run_dir / "logs" / f"generation_failure_{stamp}.json", {
                 "status": "failed", "image_id": item["image_id"], "config_hash": fingerprint,
                 "error_type": type(exc).__name__, "error": str(exc)})
             raise
@@ -169,7 +190,10 @@ def generate(config: dict, *, smoke: bool, limit: int = 1, run_dir: Path | None 
     summary = {"status": "success", "mode": "smoke" if smoke else "main", "config_hash": fingerprint,
                "run_dir": str(run_dir.relative_to(ROOT)), "count": len(records), "generated": len(todo),
                "reused_verified": reused, "pipeline_load_seconds": load_seconds,
+               "warmup_seconds": warmup_seconds, "peak_cuda_allocated_bytes": peak_memory,
                "stage_seconds": time.perf_counter() - stage_start}
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S_%fZ")
+    atomic_json(run_dir / "logs" / f"generation_{stamp}.json", summary)
     atomic_json(run_dir / "generation_summary.json", summary)
     return summary
 
@@ -186,7 +210,7 @@ def model_checks(config: dict, image_path: Path) -> dict:
     start = time.perf_counter()
     clip = CLIPModel.from_pretrained(clip_config["model_id"], revision=clip_config["revision"]).to("cuda").eval()
     processor = CLIPProcessor.from_pretrained(clip_config["model_id"], revision=clip_config["revision"], use_fast=False)
-    texts = [clip_config["text_template"].format(class_name=name) for name in CLASSES]
+    texts = class_texts(config, clip_config["text_template"])
     inputs = processor(text=texts, images=image, return_tensors="pt", padding=True).to("cuda")
     with torch.inference_mode():
         probabilities = clip(**inputs).logits_per_image.softmax(dim=-1).cpu().numpy()[0]

@@ -28,7 +28,7 @@ def file_hash(path: Path) -> str:
 def atomic_json(path: Path, value: object) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + ".tmp")
-    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     temporary.replace(path)
 
 
@@ -69,6 +69,12 @@ def load_config(path: str | Path) -> dict:
         if len(revision) != 40 or any(c not in "0123456789abcdef" for c in revision):
             raise ValueError("Model revisions must be pinned commit hashes")
     gen["prompt_template"].format(class_name="airplane")
+    if "class_phrases" in data and len(data["class_phrases"]) != len(CLASSES):
+        raise ValueError("One prompt phrase is required for each official class")
+    if classifier.get("hyperparameters"):
+        hp = classifier["hyperparameters"]
+        if hp["optimizer"] != "SGD" or hp["lr"] <= 0 or hp["updates"] <= 0 or hp["images_per_class_per_batch"] <= 0:
+            raise ValueError("Invalid predeclared classifier settings")
     return config
 
 
@@ -77,17 +83,45 @@ def require_g2(config: dict) -> None:
         raise ValueError("Full generation requires a frozen protocol and G2. Use generate --smoke for G1.")
     if not config["classifier"].get("hyperparameters"):
         raise ValueError("Classifier parameters have not been frozen")
+    evidence = config["gates"].get("g2_evidence")
+    if not evidence:
+        raise ValueError("G2 requires an actual successful smoke audit")
+    path = inside(ROOT, evidence["path"])
+    if file_hash(path) != evidence["sha256"]:
+        raise ValueError("G2 audit changed")
+    audit = json.loads(path.read_text(encoding="utf-8"))
+    if audit.get("status") != "success" or audit.get("proposal_hash") != proposal_hash(config):
+        raise ValueError("G2 did not validate this protocol")
+    if audit["code_sha256"] != critical_sources():
+        raise ValueError("Execution code changed since G2; rerun smoke before freezing")
 
 
-def candidate_plan(config: dict) -> list[dict]:
+def critical_sources() -> dict:
+    return {p.name: file_hash(p) for p in sorted((ROOT / "code").glob("*.py")) if not p.name.startswith("test_")}
+
+
+def proposal_hash(config: dict) -> str:
+    return config_hash({key: value for key, value in config.items()
+                        if key not in {"gates", "protocol_status", "protocol_version"}})
+
+
+def class_texts(config: dict, template: str) -> list[str]:
+    return [template.format(class_name=name) for name in config["dataset"].get("class_phrases", CLASSES)]
+
+
+def candidate_plan(config: dict, *, smoke_per_class: int | None = None) -> list[dict]:
     gen = config["generation"]
-    return [{"schema_version": 1, "image_id": f"synth_{class_id:02d}_{index:04d}",
+    count = gen["candidates_per_class"] if smoke_per_class is None else smoke_per_class
+    prefix = "synth" if smoke_per_class is None else "smoke_synth"
+    offset = 0 if smoke_per_class is None else config["smoke"]["generation_seed_offset"]
+    texts = class_texts(config, gen["prompt_template"])
+    return [{"schema_version": 1, "image_id": f"{prefix}_{class_id:02d}_{index:04d}",
              "class_id": class_id, "class_name": name, "source": "synthetic",
              "relative_path": f"images/{class_id:02d}/{index:04d}.png",
-             "generation_seed": gen["seed_base"] + class_id * 100_000 + index,
-             "prompt": gen["prompt_template"].format(class_name=name), "status": "planned"}
+             "generation_seed": gen["seed_base"] + offset + class_id * 100_000 + index,
+             "prompt": texts[class_id], "status": "planned"}
             for class_id, name in enumerate(CLASSES)
-            for index in range(gen["candidates_per_class"])]
+            for index in range(count)]
 
 
 def training_plan(config: dict) -> list[dict]:

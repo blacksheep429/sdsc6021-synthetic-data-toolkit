@@ -1,11 +1,12 @@
 {
   "schema_version": 1,
-  "protocol_version": "0.1-draft",
+  "protocol_version": "0.2-draft",
   "protocol_status": "draft",
   "run_id": "synthetic_v1",
   "dataset": {
     "name": "CIFAR10",
     "classes": ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"],
+    "class_phrases": ["an airplane", "a car", "a bird", "a cat", "a deer", "a dog", "a frog", "a horse", "a ship", "a truck"],
     "real_per_class": 20,
     "split_seeds": [0, 1, 2]
   },
@@ -22,17 +23,19 @@
     "use_karras_sigmas": false,
     "steps": 20,
     "guidance_scale": 6.0,
-    "prompt_template": "a photo of a {class_name}.",
+    "prompt_template": "a photo of {class_name}.",
     "negative_prompt": "",
     "candidates_per_class": 200,
     "seed_base": 20261115,
-    "generator_device": "cpu"
+    "generator_device": "cpu",
+    "invalid_output_policy": "stop_no_seed_substitution",
+    "warmup_steps": 2
   },
   "selection": {"sizes": [50, 150], "random_seed": 20261116},
   "clip": {
     "model_id": "openai/clip-vit-base-patch32",
     "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
-    "text_template": "a photo of a {class_name}."
+    "text_template": "a photo of {class_name}."
   },
   "classifier": {
     "architecture": "resnet18",
@@ -41,7 +44,12 @@
     "freeze_batchnorm": true,
     "train_views": 4,
     "synthetic_loss_weight": 0.5,
-    "hyperparameters": null
+    "feature_normalization": "l2",
+    "view_seed": 20261117,
+    "augmentation": {"size": 224, "crop_scale": [0.7, 1.0], "crop_ratio": [0.75, 1.3333333333333333], "horizontal_flip": 0.5},
+    "feature_batch_size": 32,
+    "hyperparameters": {"optimizer": "SGD", "lr": 0.1, "momentum": 0.9, "weight_decay": 0.0001, "updates": 500, "images_per_class_per_batch": 2}
   },
+  "smoke": {"candidates_per_class": 3, "selection_sizes": [1, 2], "split_seed": 0, "dev_per_class": 4, "generation_seed_offset": 10000000},
   "gates": {"g2_passed": false}
 }

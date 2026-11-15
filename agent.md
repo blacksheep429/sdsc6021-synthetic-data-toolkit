@@ -78,6 +78,7 @@
 python code/toolkit.py doctor
 python code/toolkit.py plan      --config configs/study.json
 python code/toolkit.py smoke     --config configs/study.json
+python code/toolkit.py freeze    --config configs/study.json --run-dir runs/g2_smoke/<id>
 python code/toolkit.py generate  --config configs/study.json
 python code/toolkit.py select    --config configs/study.json
 python code/toolkit.py features  --config configs/study.json
@@ -89,6 +90,10 @@ python code/toolkit.py summarize --config configs/study.json
 - `doctor`：检查实际 Python、包版本、CUDA 运算、模型可用性；不能仅凭 `cuda.is_available()` 宣布环境可用。
 - `plan`：不下载权重、不启动 GPU 作业；验证配置、类别、数量、路径、磁盘预算，输出五条件 × 三 seed 的运行清单。
 - `smoke`：小数量完整经过生成、选择、特征、训练、重载与评估；评估使用训练集内部开发划分，不读取官方测试性能。输出明确标记 `smoke`，不能纳入正式汇总。
+- G2 缩小的候选数、选择数、开发划分和独立生成 seed 偏移统一写入 configs/study.json 的 smoke 区。条件 ID 使用实际保留数量，避免把保留 1/2 张的试跑混称为正式 50/150 张实验。开发标签来自同一批 20-shot 样本；主实验仍使用完整每类 20 张训练。
+- 分类头参数在查看开发准确率前确定；G2 只检查工程可用性，不进行超参数搜索。生成与 CLIP 共用官方类名对应的固定自然语言短语，具体短语只维护在配置。非法生成停止并留记录，不通过换 seed 手工挑图。
+- 生成单独记录加载、预热、逐图耗时及显存；试跑图与正式图使用分离 seed。每次 smoke 保留独立运行证据，通过逐图校验和内容寻址特征缓存恢复昂贵阶段；分类头从相同初始状态完整重训，不声称支持优化器半步续训。
+- `freeze`：要求实际 smoke 检查通过、十类样图已审阅、配置与执行源码摘要仍匹配，才写入冻结状态；G2 证据导出到 shared/，便于队友克隆后核验。修改执行源码或实验设置后需要重新验证并冻结；不能只手填 g2_passed=true。
 - 各阶段必须可恢复运行；跳过已完成项前检查配置摘要、文件完整性和成功状态。失败和重试独立记录，不能只按文件存在判断成功。
 - `evaluate --final`：要求协议、配置、训练产物已冻结；统一评估已登记的 15 个模型及 CLIP 参考。只有评估器读取最终测试标签；汇总器不反向改变训练或选择。
 - 错误修复后如需重评，保留原记录、修复原因和新版本；不利用测试反馈寻找更好配置。
