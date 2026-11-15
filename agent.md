@@ -123,7 +123,7 @@ slides/                     待编写：展示材料
 
 | 内容 | GitHub 范围 | 维护与交接 |
 |---|---|---|
-| README.md、AGENTS.md、agent.md、progress.md、.gitignore | 提交 | A 集成规则；D 汇总进度，其他人提供实际记录 |
+| README.md、AGENTS.md、agent.md、progress.md、分工.md、.gitignore | 提交 | A 集成规则；D 汇总进度，其他人提供实际记录；分工.md 仅展示用户指定的工作包表 |
 | code/、configs/、经过验证的依赖与安装说明 | 实现后提交 | 模块作者负责；A 集成，统一配置仅维护一份 |
 | 报告和展示源稿、参考文献条目、必要图表 | 编写后提交 | 各人写本人部分，D 统稿；最终导出由 D 管理 |
 | 配置快照、真实训练索引、类别映射、生成/选择清单、小型指标与成本汇总 | 导出到 shared/<run_id>/ 后提交 | 数据作者导出，C 核对，保留 run_id、配置摘要和代码版本 |
