@@ -1,0 +1,26 @@
+{
+  "status": "success",
+  "mode": "main",
+  "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+  "timing": {
+    "load_seconds": 2.552438099999563,
+    "inference_seconds": 32.94187679999595,
+    "seconds": 35.49431610000465,
+    "reused_verified": false
+  },
+  "candidates": 2000,
+  "actual_counts": {
+    "real_only": 0,
+    "random_50": 50,
+    "random_150": 150,
+    "clip_50": 50,
+    "clip_150": 150
+  },
+  "nested": true,
+  "outputs_sha256": {
+    "manifests/clip_scores.json": "e8c07379b9f8ade778ebd13ef6c2eb45a146e1211c1bd72428442653a09442f2",
+    "manifests/selections.json": "84785962f47b6df54d55c4cb4e00c3bc1308a4acaf584825d16bb021c7a31673",
+    "manifests/rankings.json": "602904fe12e6c4ad533385444945bacac93b27974cbb112e06e826d9fd5bee9b"
+  },
+  "official_test_labels_read": false
+}

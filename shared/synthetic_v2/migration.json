@@ -1,0 +1,27 @@
+{
+  "status": "compatible_generation_adopted",
+  "source_run": "synthetic_v1",
+  "destination_run": "synthetic_v2",
+  "images": 308,
+  "generation_core_hash": "f5fe23380653e2d0daa5194fa406ff8cfda562d8450387ed9dd0b73b9fcf4da6",
+  "source_config_hash": "2e6a5b1da811fe0ae9f81892b4a94d4a62eb535b2edea1a65f66b2207c86304a",
+  "destination_config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+  "source_failures": [
+    {
+      "source": "runs/synthetic_v1/logs/generation_failure_20261115T094652_138567Z.json",
+      "sha256": "82f58fd66e46cab4b90de5b8be4e4516f1ca817f8158cd8b314bdf70a1603bc3",
+      "record": {
+        "status": "failed",
+        "image_id_or_batch": "synth_01_0108,synth_01_0109,synth_01_0110,synth_01_0111",
+        "config_hash": "2e6a5b1da811fe0ae9f81892b4a94d4a62eb535b2edea1a65f66b2207c86304a",
+        "elapsed_seconds": 400.47441259999323,
+        "pipeline_load_seconds": 3.711570400002529,
+        "warmup_seconds": 7.5454419999950915,
+        "completed": 308,
+        "error_type": "RuntimeError",
+        "error": "Invalid/black/flagged output: synth_01_0108; no seed substitution"
+      }
+    }
+  ],
+  "reason": "Only post-generation safety-flag handling changed; every accepted image reused byte-for-byte, with original seeds/prompts/model/sampler and source records preserved."
+}

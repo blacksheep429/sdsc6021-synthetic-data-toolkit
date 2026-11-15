@@ -1,0 +1,138 @@
+[
+  {
+    "source": "audits/safety_flags/synth_01_0108/review.json",
+    "sha256": "28a26c63569eab04e185d6d2383a606f73e045cfab5588dbeaece0c37496ae4b",
+    "review": {
+      "decision": "safe_to_retain_same_image",
+      "image_id": "synth_01_0108",
+      "generation_seed": 20361223,
+      "sha256": "713837255e4addf420a8d18aa8fce43d3de5d6956846632d70e2516265aa25c5",
+      "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+      "reviewer": "Codex visual inspection",
+      "reviewed_utc": "2026-11-15T10:11:15.731679+00:00",
+      "review_scope": "Safety only; no class-correctness or aesthetic selection; retain this exact original output.",
+      "observation": "Ordinary red car on a street with clothed adults in the background; no nudity or sexual content observed.",
+      "diagnostic_source": "runs/synthetic_v1/audits/failure_diagnosis/synth_01_0108_before_checker.png"
+    }
+  },
+  {
+    "source": "audits/safety_flags/synth_01_0121/review.json",
+    "sha256": "0d5b937233fb56ed29cdd661ce39c2cad5c41fdb02474067032d65ff1f93885f",
+    "review": {
+      "image_id": "synth_01_0121",
+      "generation_seed": 20361236,
+      "sha256": "330ed9cc6dff5db65e15c2a62479acabcc0cccdf8b8c9f4a385e4c835d0f7474",
+      "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+      "decision": "safe_to_retain_same_image",
+      "reviewer": "Codex visual inspection",
+      "reviewed_utc": "2026-11-15T10:17:24.469610+00:00",
+      "review_scope": "Safety only; no class correctness or aesthetic screening.",
+      "observation": "Damaged stylized car on a wooded road; no people, nudity, or sexual content observed. Retain despite visual defects; this is a safety-only decision."
+    }
+  },
+  {
+    "source": "audits/safety_flags/synth_01_0158/review.json",
+    "sha256": "c9faf7dff9cac8b7e56350161e44668c73ca27cfdb5e09696945f76773edaa6f",
+    "review": {
+      "image_id": "synth_01_0158",
+      "generation_seed": 20361273,
+      "sha256": "6ea8e702f7c7f7081df448e53a66ba46c768430642888d88d88d0e9ea40867bf",
+      "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+      "decision": "safe_to_retain_same_image",
+      "reviewer": "Codex visual inspection",
+      "reviewed_utc": "2026-11-15T10:14:15.445450+00:00",
+      "review_scope": "Safety only; no class correctness or aesthetic screening.",
+      "observation": "Parked grey car with vegetation in the background; no people, nudity, or sexual content observed."
+    }
+  },
+  {
+    "source": "audits/safety_flags/synth_04_0038/review.json",
+    "sha256": "556f28cb68b39687dbaa5d87f24b0536ba6e1ddbd090cd15ae55447852ec7e2a",
+    "review": {
+      "image_id": "synth_04_0038",
+      "generation_seed": 20661153,
+      "sha256": "80c098b48b7d866e2a54c792e538a85e194acf16b78610002e61688d8a8311c0",
+      "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+      "decision": "safe_to_retain_same_image",
+      "reviewer": "Codex visual inspection",
+      "reviewed_utc": "2026-11-15T10:26:24.426431+00:00",
+      "review_scope": "Safety only; no class correctness or aesthetic screening.",
+      "observation": "Ordinary deer standing in a grassy wooded setting; no people, sexual content, or unsafe material observed."
+    }
+  },
+  {
+    "source": "audits/safety_flags/synth_04_0060/review.json",
+    "sha256": "1db84dd8461835cdfb9c52c17133982883bd16ae8c0eeab557192182fd0698ed",
+    "review": {
+      "image_id": "synth_04_0060",
+      "generation_seed": 20661175,
+      "sha256": "ffe653220a75586c24a0838a51957a3687f9b75e256421236da42df71f8eb10b",
+      "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+      "decision": "safe_to_retain_same_image",
+      "reviewer": "Codex visual inspection",
+      "reviewed_utc": "2026-11-15T10:28:20.291554+00:00",
+      "review_scope": "Safety only; no class correctness or aesthetic screening.",
+      "observation": "Close-up of an antlered deer beside a tree; no people, nudity, or sexual material observed."
+    }
+  },
+  {
+    "source": "audits/safety_flags/synth_04_0084/review.json",
+    "sha256": "1316b04962be41385062284b025e370afed6100ad630fc74a699a83a66265522",
+    "review": {
+      "image_id": "synth_04_0084",
+      "generation_seed": 20661199,
+      "sha256": "ed8001d5486cc6e1f9a462b7916efca701d48610ba6f71a030691326c53acfed",
+      "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+      "decision": "safe_to_retain_same_image",
+      "reviewer": "Codex visual inspection",
+      "reviewed_utc": "2026-11-15T10:28:20.357915+00:00",
+      "review_scope": "Safety only; no class correctness or aesthetic screening.",
+      "observation": "Deer standing outdoors on vegetation; no people or sexual material observed."
+    }
+  },
+  {
+    "source": "audits/safety_flags/synth_04_0193/review.json",
+    "sha256": "641eecab551116512ce21a153cbbd0519adf5bd218627373698ebfc7fc2e17cb",
+    "review": {
+      "image_id": "synth_04_0193",
+      "generation_seed": 20661308,
+      "sha256": "608bc3ab66e4d8ba76d8bd8a304a6fbfa527c02af5530e415f08729ab40dd3c2",
+      "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+      "decision": "safe_to_retain_same_image",
+      "reviewer": "Codex visual inspection",
+      "reviewed_utc": "2026-11-15T10:28:20.414687+00:00",
+      "review_scope": "Safety only; no class correctness or aesthetic screening.",
+      "observation": "Antlered deer in a wooded grassy setting; no people or sexual material observed."
+    }
+  },
+  {
+    "source": "audits/safety_flags/synth_07_0001/review.json",
+    "sha256": "b99b44023a0106b84007905f3d1792d6b9908e35a159eb86e0ec51e06d77d853",
+    "review": {
+      "image_id": "synth_07_0001",
+      "generation_seed": 20961116,
+      "sha256": "a8ddaef85461614323360b42ba35d89e83d23643f88b27f708260380cc3bbda1",
+      "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+      "decision": "safe_to_retain_same_image",
+      "reviewer": "Codex visual inspection",
+      "reviewed_utc": "2026-11-15T10:42:28.591901+00:00",
+      "review_scope": "Safety only; no class correctness or aesthetic screening.",
+      "observation": "Ordinary fully visible horse standing on grass; no humans, nudity, sexual activity or graphic injury."
+    }
+  },
+  {
+    "source": "audits/safety_flags/synth_07_0051/review.json",
+    "sha256": "2a7e43865ee32d7afc966ab5b154d9161f976018910b58dbd148a6bfd8fe9449",
+    "review": {
+      "image_id": "synth_07_0051",
+      "generation_seed": 20961166,
+      "sha256": "77336ffb656c480444b210c3873d01b7ecdb333c8f2ceb9894ce126d0d93a82c",
+      "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+      "decision": "safe_to_retain_same_image",
+      "reviewer": "Codex visual inspection",
+      "reviewed_utc": "2026-11-15T10:42:28.648665+00:00",
+      "review_scope": "Safety only; no class correctness or aesthetic screening.",
+      "observation": "Ordinary side view of a horse in a field; no humans, nudity, sexual activity or graphic injury."
+    }
+  }
+]

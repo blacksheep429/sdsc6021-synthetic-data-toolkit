@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "run_id": "synthetic_v2",
+  "status": "G3_production_costs_only",
+  "device": "NVIDIA GeForce RTX 5070 Ti Laptop GPU; 12227 MiB; classifier heads on CPU",
+  "generation_invocations": [
+    {
+      "source": "runs/synthetic_v1/logs/generation_failure_20261115T094652_138567Z.json",
+      "sha256": "82f58fd66e46cab4b90de5b8be4e4516f1ca817f8158cd8b314bdf70a1603bc3",
+      "status": "failed",
+      "seconds": 400.47441259999323,
+      "pipeline_load_seconds": 3.711570400002529,
+      "warmup_seconds": 7.5454419999950915
+    },
+    {
+      "source": "runs/synthetic_v2/logs/generation_20261115T104738_229482Z.json",
+      "sha256": "27a74bc460c69e18fdb0ec1aeca83c98ce499c347c11e2d267d544ac7dee2da3",
+      "status": "success",
+      "seconds": 61.09795440000016,
+      "pipeline_load_seconds": 3.895169799994619,
+      "warmup_seconds": 7.564672299995436
+    },
+    {
+      "source": "runs/synthetic_v2/logs/generation_failure_20261115T104609_047626Z.json",
+      "sha256": "34ab14ff23db7ff314b6a92d38213fc9043094913ece22b8cbd3de38829ac284",
+      "status": "failed",
+      "seconds": 2089.7392924000014,
+      "pipeline_load_seconds": 3.7117322999984026,
+      "warmup_seconds": 7.535883900003682
+    }
+  ],
+  "candidate_pool_production_seconds": 2551.311659399995,
+  "generation_loading_seconds_included": 11.31847249999555,
+  "generation_warmup_seconds_included": 22.64599819999421,
+  "stages": {
+    "select": {
+      "seconds": 39.97218389999762,
+      "source": "runs/synthetic_v2/logs/select_20261115T104820_221993Z.json",
+      "sha256": "b7a1193fdadec5712c234d4eeac5b47c8f5481f0385c607b6d2afed9a7a8a53d"
+    },
+    "features": {
+      "seconds": 69.52588499999547,
+      "source": "runs/synthetic_v2/logs/features_20261115T104931_724994Z.json",
+      "sha256": "09a12ef85e4e076afd9e2a43880051923cea0dcc7c9efc103591bedf349196d6"
+    },
+    "train": {
+      "seconds": 8.417767400002049,
+      "source": "runs/synthetic_v2/logs/train_20261115T104942_018925Z.json",
+      "sha256": "da228160ae90ad266c654e7276d7000f2db59e165d34ae8337d2514bfe4edd80"
+    }
+  },
+  "inclusions": "All recorded production generation invocations, including the source failed run and safety-deferred batch retries; selection/features/train each counted once.",
+  "exclusions": [
+    "G1 downloads/environment setup",
+    "G2 smoke runs",
+    "failure diagnostic reproductions",
+    "protocol revision and software development",
+    "human review time and idle gaps",
+    "packaging/transfer/restore checks",
+    "G4 final evaluation and human audits"
+  ],
+  "interpretation": "Summed stage invocation time, not end-to-end elapsed development time or single-image latency. Human review overlapped generation. The shared 2000-image pool is not charged again to each classifier."
+}

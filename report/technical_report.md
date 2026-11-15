@@ -1,0 +1,117 @@
+# When Does Synthetic Data Help? A Generation–Training–Evaluation Toolkit for 20-Shot Image Classification
+
+> Working report: G3 generation, selection, features and 15-head training are complete. Final-test results, two-person label audit, non-author trial and named contributions remain outstanding. This file is the report source, not an additional execution protocol; the governing protocol is [agent.md](../agent.md), with executable settings in [study.json](../configs/study.json).
+
+## Abstract
+
+We develop a command-line toolkit for a practical decision: whether adding generated images improves a classifier when real training labels are scarce. The toolkit generates class-conditioned candidates, selects equal-sized random or CLIP-ranked subsets, caches features from a frozen ImageNet ResNet-18, trains paired linear classifiers, and seals their artifacts before real-test evaluation. Our case study uses CIFAR-10 with 20 real images per class, 0/50/150 retained synthetic images per class and three paired seeds. Source-balanced losses, equal optimizer updates and deterministic selection make the comparisons traceable. **The final empirical finding and recommendation will be added only after evaluation of the sealed models.**
+
+## 1. Problem, intended users and scope
+
+The intended users are students and prototype developers who already possess a small labelled image set and need to decide whether spending compute on text-to-image generation is useful. Their immediate output should be a reproducible comparison against a real-only baseline, including reusable classifier files and measured cost. A visually convincing gallery alone cannot establish that the classifier benefits.
+
+The application investigates three questions within one fixed setting: whether generated additions help; whether retaining 150 rather than 50 images per class changes performance; and whether CLIP ranking improves over random selection at equal retained counts. CIFAR-10 provides a controlled simulation of label scarcity. It does not establish demand in a particular industry, prove real annotation-cost savings, or cover other label budgets. Third-party needs validation and a non-author reproduction trial have not yet been completed.
+
+## 2. Related work and contribution
+
+Generative augmentation for recognition already has substantial precedent. He et al. investigate generated images for data-scarce recognition and transfer learning, including CLIP-confidence filtering, mixed real/synthetic training and frozen BatchNorm. These are established ingredients. Our contribution is the traceable implementation and controlled fixed-budget case, using an ImageNet ResNet-18 feature backbone. [He et al., 2023](https://arxiv.org/html/2210.07574v2)
+
+Azizi et al. report classification improvements on ImageNet using samples from diffusion models adapted to class-conditioned generation. Those results motivate testing downstream utility, but do not guarantee that an unchanged SD1.5 generator helps our frozen-feature, low-label CIFAR setting. [Azizi et al., 2023](https://arxiv.org/abs/2304.08466)
+
+CLIP provides language-defined image comparisons and a zero-shot recognition route. We therefore use it both for candidate ranking and, during the final evaluation, as a direct alternative that requires no dataset-specific classifier training. Its confidence is a selection score; it is not a human correctness label. [Radford et al., 2021](https://proceedings.mlr.press/v139/radford21a.html)
+
+Our contribution is an integrated, auditable tool and a controlled case study. It combines frozen model references, equal-size nested selections, paired classifier initialization and sampling, fixed source weights, integrity-checked caches and a model seal before test access. We make no new generative-model or state-of-the-art classification claim.
+
+## 3. Toolkit and experimental protocol
+
+```mermaid
+flowchart LR
+  A[Class phrases and real training images] --> B[SD1.5 candidate generation]
+  B --> C[Random or CLIP-ranked selection]
+  A --> D[Frozen ResNet features]
+  C --> D
+  D --> E[Five paired linear heads per seed]
+  E --> F[Checkpoint reload and artifact seal]
+  F --> G[Held-out real-test evaluation]
+```
+
+### 3.1 Real data and split isolation
+
+CIFAR-10 consists of 32×32 colour images in ten classes, with 50,000 official training images and 10,000 official test images. We preserve its official class mapping. Its automobile/truck taxonomy excludes pickup trucks, which matters when judging broadly worded generated classes. [Dataset source](https://www.cs.toronto.edu/~kriz/cifar.html)
+
+For each split seed in {0,1,2}, a deterministic class-wise permutation of the official training indices supplies 20 images per class. All five conditions for that seed share those 200 real images. Formal training uses all 20 per class. During engineering verification only, the seed-0 sample is partitioned into 16 training and 4 development images per class. These development labels are part of the same 20-shot sample, and hyperparameters are fixed before inspecting development performance.
+
+G3 extracts and deserializes only the five official training batches and class metadata, after checksum verification. Although the downloaded archive contains test bytes, the test batch is not extracted or deserialized during G3. The final evaluator is the sole entry point that accesses the official test labels.
+
+### 3.2 Generation and retained subsets
+
+We use frozen Stable Diffusion 1.5 weights, referenced by an exact repository revision and verified file hashes. Latent diffusion supplies the architectural background for this generator. [Rombach et al., 2022](https://arxiv.org/abs/2112.10752)
+
+The formal pool contains 200 candidates per class, shared across all split seeds. Class prompts use a fixed phrase such as “an airplane” or “a car”, within one photo template. Sampling uses 512×512 output, 20 steps, DPM-Solver++ with solver order 2, guidance scale 6, fp16 and batches of four. Each image has its own CPU random generator. Engineering smoke images use a separate seed range. Exact model revisions, phrases and sampler flags are maintained in the configuration.
+
+Random ranking uses a fixed within-class permutation. CLIP ranking uses the target-class probability from a softmax over all ten image–text logits, including the model's learned scale. Ties are resolved by image ID. For each method, the top 50 are contained in the top 150. Both methods retain exactly the requested number from every class.
+
+| Condition | Retained synthetic images per class | Selection |
+|---|---:|---|
+| real_only | 0 | — |
+| random_50 | 50 | Fixed random permutation |
+| clip_50 | 50 | Target-class CLIP rank |
+| random_150 | 150 | Same random permutation |
+| clip_150 | 150 | Same CLIP rank |
+
+The generator is not fine-tuned. Non-finite or genuinely black model outputs stop generation. Safety flags retain the exact pre-checker output for a hash-bound safety review; their original batches are deferred until reviewed, while unrelated batches can continue. A reviewer may retain the same output only when it is safe, with no seed substitution or screening for classification quality. The pool cannot proceed to selection or training until all required reviews are resolved.
+
+This handling was introduced as a recorded protocol correction. The initial 0.3 run stopped after 308 accepted images when the safety checker blacked out an ordinary red car with clothed pedestrians. Replaying its original seed identified a false positive. Revision 0.4 changes that post-generation handling, preserves the failed run, and records safety decisions against exact image hashes. Sampling parameters remain unchanged; all 30 engineering-smoke image hashes match between revisions. Previously accepted images are adopted byte-for-byte into a new run with source records and configuration hashes. Failure and replay overhead must be reported separately from the final successful stage timings.
+
+### 3.3 Frozen features and matched optimization
+
+The backbone is an ImageNet-initialized ResNet-18. The residual architecture follows He et al.; our implementation uses the fixed torchvision ImageNet V1 weights. Backbone parameters and BatchNorm running statistics remain frozen. [He et al., 2016](https://arxiv.org/abs/1512.03385)
+
+Each original training image contributes one weight-prescribed base view and three deterministically seeded augmented views. Augmentation uses a 224-pixel random resized crop with scale [0.7,1.0], aspect ratio [0.75,4/3], and horizontal flipping probability 0.5, followed by ImageNet normalization. We L2-normalize the 512-dimensional features. Real and synthetic images use the same view procedure. Final test images use only the base view.
+
+Only the ten-class linear head is optimized. Let the per-source loss be the mean cross-entropy over original images, after averaging each original's four view losses. The mixed objective is
+
+\[
+L_{\mathrm{mixed}}=0.5\,L_{\mathrm{real}}+0.5\,L_{\mathrm{synthetic}}.
+\]
+
+The real-only objective is the unscaled real-source loss. Consequently, adding more synthetic originals does not automatically increase their total loss weight. All conditions use 500 SGD updates, learning rate 0.1, momentum 0.9 and weight decay 0.0001. Each update samples two originals per class, with replacement, from each source that is present. All five heads within a seed share the initial head state and real-batch schedule. Three seeds therefore produce 15 formal classifiers.
+
+### 3.4 Reproducibility and output objects
+
+The single CLI stages generation, selection, features, training and gated evaluation. Every image carries a class ID, prompt, seed, path and checksum. Feature cache keys bind image bytes, view settings, backbone weights, library versions and extraction source. A cache success record is written after actual freezing checks succeed. Checkpoint reuse also verifies task inputs, feature bytes, model file integrity and reloaded outputs.
+
+Completed heads are sealed into a 15-model manifest. G3 reload-check predictions use training images and are not generalization estimates. Final evaluation requires the seal and the explicit final-evaluation command. Team sharing includes source, configuration, selected IDs, rankings, small result files and artifact hashes. Large image, feature and classifier archives are delivered as GitHub Release assets with server-verified hashes and an explicit access status. Vendor pretrained weights are referenced rather than redistributed.
+
+## 4. Evaluation plan and current evidence
+
+**Formal results are pending G4.** The engineering smoke has exercised all five conditions, selection nesting, split isolation, loss weighting, frozen features, checkpoint reload and cache recovery. It uses 1/2 retained synthetic images per class and one development split; its accuracies are not evidence for the formal 50/150-image experiment.
+
+G3 has produced 2,000 candidates (200 per class), all nested random/CLIP selections, and 15 sealed heads. Three 200-image real subsets contain 598 distinct originals; the portable feature array therefore has shape [2598,4,512]. The feature extraction checks confirm frozen parameters and unchanged BatchNorm statistics. An independent archive restoration verified all 2,000 image hashes, 3,001 bundled file hashes, the feature arrays and bit-identical reload logits for all 15 heads. These establish artifact integrity, not downstream utility.
+
+| G3 production stage | Recorded seconds |
+|---|---:|
+| Candidate-pool generation invocations, including source failure and recovery | 2551.31 |
+| CLIP selection, including input/output verification | 39.97 |
+| Frozen feature extraction and bundle preparation | 69.53 |
+| All 15 CPU classification heads and reload checks | 8.42 |
+
+The generation figure sums three recorded production invocations across the preserved failed run and the current run. It includes their loading, warm-up and deferred-batch retries. It excludes downloads, G2, diagnostic reproductions, protocol/software development, human review, idle gaps, packaging and transfer. It is neither elapsed project time nor a complete end-to-end product cost. Full receipt references and exclusions are in shared/synthetic_v2/stage_costs.json. Final evaluation costs will be reported separately.
+
+For final results, report top-1 accuracy as mean ± sample standard deviation across the three seeds. Compute each synthetic condition's improvement against the real-only classifier with the same seed, then report the mean and sample standard deviation of those percentage-point differences. The three-seed standard deviation is not a confidence interval. Include per-class results and one CLIP zero-shot evaluation on the same real test set.
+
+Costs must distinguish downloading/loading, warm-up, generation, CLIP scoring, feature extraction, head fitting and final evaluation. Report first-run and cached-run costs separately. The candidate pool and selection rankings are shared across conditions and seeds, so their costs must not be counted as independent repeated generation jobs. Per-image generation timing in batch mode is an amortized throughput measure rather than single-request latency.
+
+The planned candidate audit samples ten generated candidates per class for two independent annotators, with CLIP scores hidden. The planned non-author trial records task completion, time and assistance. Neither activity has been completed at this draft stage.
+
+## 5. Limitations and interpretation
+
+The study covers one dataset, one real-label budget, one generator and one feature backbone. The three seeds share one synthetic pool and therefore do not measure generation-pool variability. The models contain external pretraining information; the experiment is not learning classification from 200 images without prior knowledge. Generated class labels are inferred from prompts and may be incorrect. Ranking can reduce diversity or prefer images unlike CIFAR test examples, but those mechanisms require additional evidence and must not be inferred from an accuracy difference alone.
+
+The practical recommendation must follow the eventual test and cost results. If augmentation fails to improve the matched baseline, or a cheaper zero-shot alternative is stronger, report that outcome directly. A working pipeline demonstrates engineering usefulness; downstream benefit and user usefulness require their own evidence.
+
+## 6. Actual contributions and completion status
+
+The user directs work package A. Codex implemented and executed the current engineering pipeline under that authorization. B/C/D human ownership, independent verification, final report editing, presentation work and attendance must be recorded from actual contributions. No teammate is credited with code, experiments or annotations solely because a role was proposed.
+
+This draft will be updated from generated G3/G4 records. Named contribution details, final findings, user-trial results and presentation evidence remain to be supplied.

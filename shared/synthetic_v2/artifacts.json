@@ -1,0 +1,165 @@
+[
+  {
+    "artifact_id": "real_only_seed0",
+    "kind": "linear_classifier",
+    "run_id": "synthetic_v2",
+    "relative_path": "splits/seed0/models/real_only_seed0.pt",
+    "sha256": "be7867346b43a6f4d5b254561addabf9c53a6330d79a2d64cc4f7818f116026c",
+    "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+    "provided_by": "A / Codex under user direction",
+    "access": "local_only_not_delivered"
+  },
+  {
+    "artifact_id": "random_50_seed0",
+    "kind": "linear_classifier",
+    "run_id": "synthetic_v2",
+    "relative_path": "splits/seed0/models/random_50_seed0.pt",
+    "sha256": "fc6458c693fd38cd7b90724288b830bb274b2f2f5182547031c506116e0aee74",
+    "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+    "provided_by": "A / Codex under user direction",
+    "access": "local_only_not_delivered"
+  },
+  {
+    "artifact_id": "clip_50_seed0",
+    "kind": "linear_classifier",
+    "run_id": "synthetic_v2",
+    "relative_path": "splits/seed0/models/clip_50_seed0.pt",
+    "sha256": "5a866f5a13823d27ef40fb12553898c83e40a59854b56016f57de60250a2691c",
+    "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+    "provided_by": "A / Codex under user direction",
+    "access": "local_only_not_delivered"
+  },
+  {
+    "artifact_id": "random_150_seed0",
+    "kind": "linear_classifier",
+    "run_id": "synthetic_v2",
+    "relative_path": "splits/seed0/models/random_150_seed0.pt",
+    "sha256": "59fac39430a2a8805b833ce9796ca65fd20fa896809be6efef3b01e5d9b99228",
+    "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+    "provided_by": "A / Codex under user direction",
+    "access": "local_only_not_delivered"
+  },
+  {
+    "artifact_id": "clip_150_seed0",
+    "kind": "linear_classifier",
+    "run_id": "synthetic_v2",
+    "relative_path": "splits/seed0/models/clip_150_seed0.pt",
+    "sha256": "adab30f8cd183b53a14dac4dc59602f8ba0e4a238c9873a3986574fcfa02e094",
+    "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+    "provided_by": "A / Codex under user direction",
+    "access": "local_only_not_delivered"
+  },
+  {
+    "artifact_id": "real_only_seed1",
+    "kind": "linear_classifier",
+    "run_id": "synthetic_v2",
+    "relative_path": "splits/seed1/models/real_only_seed1.pt",
+    "sha256": "8a13cb62017bf7936be2c4e14fefd18c6ebcb240ea1d593b34734924af402410",
+    "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+    "provided_by": "A / Codex under user direction",
+    "access": "local_only_not_delivered"
+  },
+  {
+    "artifact_id": "random_50_seed1",
+    "kind": "linear_classifier",
+    "run_id": "synthetic_v2",
+    "relative_path": "splits/seed1/models/random_50_seed1.pt",
+    "sha256": "57755c5ae4dd27711a8be6e551ed92a185a2a7d8f2ba28c2827baae99cc63af4",
+    "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+    "provided_by": "A / Codex under user direction",
+    "access": "local_only_not_delivered"
+  },
+  {
+    "artifact_id": "clip_50_seed1",
+    "kind": "linear_classifier",
+    "run_id": "synthetic_v2",
+    "relative_path": "splits/seed1/models/clip_50_seed1.pt",
+    "sha256": "ca9a5c926593bd8493104e6fd93289838eea2eeb87351776594c5fbca7f30a04",
+    "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+    "provided_by": "A / Codex under user direction",
+    "access": "local_only_not_delivered"
+  },
+  {
+    "artifact_id": "random_150_seed1",
+    "kind": "linear_classifier",
+    "run_id": "synthetic_v2",
+    "relative_path": "splits/seed1/models/random_150_seed1.pt",
+    "sha256": "dd44a9b51c9a1a540c66cf228eebc89e535dad22593cede7f374f302bba8886b",
+    "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+    "provided_by": "A / Codex under user direction",
+    "access": "local_only_not_delivered"
+  },
+  {
+    "artifact_id": "clip_150_seed1",
+    "kind": "linear_classifier",
+    "run_id": "synthetic_v2",
+    "relative_path": "splits/seed1/models/clip_150_seed1.pt",
+    "sha256": "1443f35c9fabbb8c1ebd61b6188a47f5ef067f1d1686512c66593a27970f4090",
+    "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+    "provided_by": "A / Codex under user direction",
+    "access": "local_only_not_delivered"
+  },
+  {
+    "artifact_id": "real_only_seed2",
+    "kind": "linear_classifier",
+    "run_id": "synthetic_v2",
+    "relative_path": "splits/seed2/models/real_only_seed2.pt",
+    "sha256": "99435c50bd5df07afadfb7a0c6b58f308a6d7d2a8de6fd6bff625a7fe598d1be",
+    "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+    "provided_by": "A / Codex under user direction",
+    "access": "local_only_not_delivered"
+  },
+  {
+    "artifact_id": "random_50_seed2",
+    "kind": "linear_classifier",
+    "run_id": "synthetic_v2",
+    "relative_path": "splits/seed2/models/random_50_seed2.pt",
+    "sha256": "bcbbb52d3e68ce2d2eaf4eaaac85460fa2c1d6d75da626359f583c6bc1e7d641",
+    "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+    "provided_by": "A / Codex under user direction",
+    "access": "local_only_not_delivered"
+  },
+  {
+    "artifact_id": "clip_50_seed2",
+    "kind": "linear_classifier",
+    "run_id": "synthetic_v2",
+    "relative_path": "splits/seed2/models/clip_50_seed2.pt",
+    "sha256": "13ab853213c6eb7ff756e0e1fad849aecebb9204c53ab5fa78929d5c6d92b433",
+    "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+    "provided_by": "A / Codex under user direction",
+    "access": "local_only_not_delivered"
+  },
+  {
+    "artifact_id": "random_150_seed2",
+    "kind": "linear_classifier",
+    "run_id": "synthetic_v2",
+    "relative_path": "splits/seed2/models/random_150_seed2.pt",
+    "sha256": "6b3e4806820fd9c3950c2abf37adff78055d6b2eb11ebdbb19014a0be2cf905f",
+    "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+    "provided_by": "A / Codex under user direction",
+    "access": "local_only_not_delivered"
+  },
+  {
+    "artifact_id": "clip_150_seed2",
+    "kind": "linear_classifier",
+    "run_id": "synthetic_v2",
+    "relative_path": "splits/seed2/models/clip_150_seed2.pt",
+    "sha256": "cd38041e0d0caf736f87687734fb9ac7f80d62d621c28f9b9398751f34c433ef",
+    "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+    "provided_by": "A / Codex under user direction",
+    "access": "local_only_not_delivered"
+  },
+  {
+    "artifact_id": "training_features",
+    "kind": "portable_npz",
+    "relative_path": "features/training_features.npz",
+    "sha256": "1ad7e911c546c30530d5c983064c2453c9a2c6b844bb477bc3fe85c0da3e218b",
+    "shape": [
+      2598,
+      4,
+      512
+    ],
+    "run_id": "synthetic_v2",
+    "access": "local_only_not_delivered"
+  }
+]

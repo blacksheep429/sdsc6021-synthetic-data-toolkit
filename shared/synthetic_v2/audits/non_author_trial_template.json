@@ -1,0 +1,15 @@
+{
+  "status": "not_started",
+  "arrangement": "user_will_arrange_later",
+  "participant_name_or_alias": null,
+  "non_author_confirmed": null,
+  "start_time": null,
+  "end_time": null,
+  "elapsed_minutes": null,
+  "model_and_dataset_cache_prepared": null,
+  "generated_image_cache_hits": null,
+  "completed_without_help": null,
+  "help_received": [],
+  "output_run_dir": null,
+  "observations": []
+}

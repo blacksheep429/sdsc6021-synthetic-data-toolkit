@@ -1,0 +1,12 @@
+{
+  "status": "prepared_not_delivered_or_annotated",
+  "images": 100,
+  "annotators_confirmed": 0,
+  "relative_path": "deliverables/audit_packet_04/label_audit_packet.zip",
+  "sha256": "1c12360f61baf1beaf8af2f878900db751a8e5f79b7d09c8d3c49b5d39c0f85b",
+  "bytes": 44594834,
+  "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+  "sampling_seed": 20261118,
+  "access": "local_only_not_delivered",
+  "arrangement": "user_will_arrange_later"
+}

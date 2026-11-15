@@ -1,0 +1,135 @@
+{
+  "status": "success",
+  "mode": "main",
+  "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+  "synthetic": {
+    "status": "success",
+    "parameters_frozen": true,
+    "batchnorm_unchanged": true,
+    "cache_hits": 0,
+    "computed": 2000,
+    "feature_dimension": 512,
+    "load_seconds": 0.1994602999984636,
+    "inference_seconds": 36.67556809999951,
+    "peak_cuda_allocated_bytes": 269665280,
+    "seconds": 54.93820670000423
+  },
+  "paired_splits": {
+    "0": {
+      "data": {
+        "source": "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz",
+        "official_train_file_md5": {
+          "data_batch_1": "c99cafc152244af753f735de768cd75f",
+          "data_batch_2": "d4bba439e000b95fd0a9bffe97cbabec",
+          "data_batch_3": "54ebc095f3ab1f0389bbae665268c751",
+          "data_batch_4": "634d18415352ddfa80567beed471001a",
+          "data_batch_5": "482c414d41f54cd18b22e5b47cb7c3cb",
+          "batches.meta": "5ff9c542aee3614f3951f8cda6e48888"
+        },
+        "official_test_batch_extracted": false,
+        "official_test_labels_read": false,
+        "archive_contains_test_bytes": true,
+        "mode": "main",
+        "train_count": 200,
+        "dev_count": 0,
+        "selected_label_budget": 200,
+        "dev_is_subset_of_20_shot": true
+      },
+      "features": {
+        "status": "success",
+        "parameters_frozen": true,
+        "batchnorm_unchanged": true,
+        "cache_hits": 160,
+        "computed": 40,
+        "feature_dimension": 512,
+        "load_seconds": 0.13457190000190167,
+        "inference_seconds": 0.1855950999961351,
+        "peak_cuda_allocated_bytes": 269665280,
+        "seconds": 1.2519788999998127
+      },
+      "real_manifest_sha256": "c9d07b61fb14f2c70f6abd721a470558b843850288c221c3b9e99b77cf801f00"
+    },
+    "1": {
+      "data": {
+        "source": "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz",
+        "official_train_file_md5": {
+          "data_batch_1": "c99cafc152244af753f735de768cd75f",
+          "data_batch_2": "d4bba439e000b95fd0a9bffe97cbabec",
+          "data_batch_3": "54ebc095f3ab1f0389bbae665268c751",
+          "data_batch_4": "634d18415352ddfa80567beed471001a",
+          "data_batch_5": "482c414d41f54cd18b22e5b47cb7c3cb",
+          "batches.meta": "5ff9c542aee3614f3951f8cda6e48888"
+        },
+        "official_test_batch_extracted": false,
+        "official_test_labels_read": false,
+        "archive_contains_test_bytes": true,
+        "mode": "main",
+        "train_count": 200,
+        "dev_count": 0,
+        "selected_label_budget": 200,
+        "dev_is_subset_of_20_shot": true
+      },
+      "features": {
+        "status": "success",
+        "parameters_frozen": true,
+        "batchnorm_unchanged": true,
+        "cache_hits": 0,
+        "computed": 200,
+        "feature_dimension": 512,
+        "load_seconds": 0.132012100002612,
+        "inference_seconds": 0.9006594000020414,
+        "peak_cuda_allocated_bytes": 269665280,
+        "seconds": 2.8819971999982954
+      },
+      "real_manifest_sha256": "42b96a171f5faa2a1a8770cabbdd45deb97773967f060b78006b88af5be22937"
+    },
+    "2": {
+      "data": {
+        "source": "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz",
+        "official_train_file_md5": {
+          "data_batch_1": "c99cafc152244af753f735de768cd75f",
+          "data_batch_2": "d4bba439e000b95fd0a9bffe97cbabec",
+          "data_batch_3": "54ebc095f3ab1f0389bbae665268c751",
+          "data_batch_4": "634d18415352ddfa80567beed471001a",
+          "data_batch_5": "482c414d41f54cd18b22e5b47cb7c3cb",
+          "batches.meta": "5ff9c542aee3614f3951f8cda6e48888"
+        },
+        "official_test_batch_extracted": false,
+        "official_test_labels_read": false,
+        "archive_contains_test_bytes": true,
+        "mode": "main",
+        "train_count": 200,
+        "dev_count": 0,
+        "selected_label_budget": 200,
+        "dev_is_subset_of_20_shot": true
+      },
+      "features": {
+        "status": "success",
+        "parameters_frozen": true,
+        "batchnorm_unchanged": true,
+        "cache_hits": 2,
+        "computed": 198,
+        "feature_dimension": 512,
+        "load_seconds": 0.13008350000018254,
+        "inference_seconds": 0.8698702999972738,
+        "peak_cuda_allocated_bytes": 269665280,
+        "seconds": 2.8575245999963954
+      },
+      "real_manifest_sha256": "5d5a5e2fbd5d92643ea8e0ed83c57378436e13b5ea0fb761ceb2ae4e7d7aa618"
+    }
+  },
+  "images": 2598,
+  "views": 10392,
+  "bundle": {
+    "relative_path": "features/training_features.npz",
+    "sha256": "1ad7e911c546c30530d5c983064c2453c9a2c6b844bb477bc3fe85c0da3e218b",
+    "shape": [
+      2598,
+      4,
+      512
+    ]
+  },
+  "index_sha256": "3bc5d6ff7521de528365f12bafc52a09a6a16bd8a99744f8b164aff434f7915d",
+  "official_test_labels_read": false,
+  "seconds": 69.52506110000104
+}
