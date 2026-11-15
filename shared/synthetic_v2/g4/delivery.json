@@ -1,0 +1,16 @@
+{
+  "asset_name": "g4_predictions_and_run_records.zip",
+  "relative_path": "deliverables/g4_synthetic_v2/g4_predictions_and_run_records.zip",
+  "sha256": "91045de3b946dccd21d9b6810f06309b1f86dc09ba4d814a158a4f9c078f6807",
+  "bytes": 3980356,
+  "access": "github_release_public",
+  "source_commit": "26e107feba6c4c4c5f447f84cada707e140d738c",
+  "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+  "model_seal_sha256": "a608c3dc8c2c6f190e4a2293c346e5ecc3ae2ba45e057123aac5108ea4e4f34e",
+  "prediction_rows": 160000,
+  "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g4-official-evaluation-v0.4/g4_predictions_and_run_records.zip",
+  "release_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/tag/g4-official-evaluation-v0.4",
+  "github_asset_id": 751131180,
+  "anonymous_full_download_verified": true,
+  "published_at": "2026-11-15T13:45:13Z"
+}

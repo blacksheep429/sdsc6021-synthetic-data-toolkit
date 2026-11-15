@@ -2,13 +2,14 @@
 
 面向 20-shot 图像分类的合成数据增强工具：生成补充图片、选择样本、训练分类器，并评估真实测试效果。
 
-> 当前：A 的 G3 工程、生成与交接完成。2,000 张候选图、便携特征和 15 个封存分类头已在 [GitHub Release](https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/tag/g3-synthetic-v2-v0.4)公开，下载验证通过；[团队交接入口](shared/synthetic_v2/README.md)说明按分工下载和使用。最终测试及真人审计尚未开始，实际进度见 progress.md。
+> 当前：G4 正式评估与预测交接已完成。15 个封存分类器和一次 CLIP 参考共 160,000 条正式测试预测，连同运行记录已公开并验证下载。[C 的 G4 数据入口](shared/synthetic_v2/g4/README.md)说明约 4 MB 预测包的下载、字段和后续统计任务；[G3 入口](shared/synthetic_v2/README.md)保留图片、特征与模型。C 的独立统计/图表及真人审计仍待完成，实际进度见 progress.md。
 
 ## 阅读入口
 
 - [agent.md](agent.md)：唯一项目规则，包含实验协议、数据接口、GitHub 共享范围、验收及报告框架。
 - [progress.md](progress.md)：唯一实际进度，包含证据、待办、阻塞和成员分工。
 - [队友接手清单](progress.md#队友现在需要做什么)：B/C/D 现在需要取什么、完成什么，以及哪些任务使用 A 的 GPU 电脑。
+- [G4 正式预测与运行记录](shared/synthetic_v2/g4/README.md)：C 从这里下载实际测试预测，完成独立重算和图表。
 - [团队分工](分工.md)：A–D 工作包及必须交出的产物；具体成员认领和实际完成情况仍以 progress.md 为准。
 
 本文件只用于入门导航；详细协议只维护在 agent.md，运行状态只维护在 progress.md。
@@ -46,4 +47,4 @@
 
 环境使用 Python 3.12.14。重建时用 Python 3.12 创建 .venv，再依次安装 requirements-gpu.txt（官方 cu128 索引）和 requirements.txt（其余固定版本）；pip 命令加 --disable-pip-version-check。本机安装曾复用已有 CUDA 分发包，详细复制和校验记录保留在本地 runs/_cache/。
 
-`doctor --models` 检查 SD1.5 出图、CLIP 打分与冻结 ResNet 特征；首次缺少缓存时需要下载权重。`smoke` 保留独立证据并复用经过校验的生成/特征缓存；`freeze --run-dir <本地试跑目录>` 接受完整检查和十类样图审阅通过的当前配置/代码。`select/features/train` 为正式阶段入口，`summarize` 导出正式共享快照，加 --run-dir 则导出指定 smoke。G4 的 evaluate --final 要求 15 个封存模型，本轮未执行最终测试。
+`doctor --models` 检查 SD1.5 出图、CLIP 打分与冻结 ResNet 特征；首次缺少缓存时需要下载权重。`smoke` 保留独立证据并复用经过校验的生成/特征缓存；`freeze --run-dir <本地试跑目录>` 接受完整检查和十类样图审阅通过的当前配置/代码。`select/features/train` 为正式阶段入口，`summarize` 导出正式共享快照，加 --run-dir 则导出指定 smoke。G4 的 evaluate --final 已在 15 个封存模型上执行成功；后续分析直接使用已发布预测，不利用测试结果调参或重训。

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "G3_complete_G4_not_started",
+  "status": "G4_evaluation_complete_audits_pending",
   "run_id": "synthetic_v2",
   "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
   "code_sha256": {
@@ -188,8 +188,105 @@
     "seconds": 69.52506110000104
   },
   "training_seconds": 8.387839499999245,
-  "official_test_labels_read": false,
-  "formal_accuracy": null,
+  "official_test_labels_read": true,
+  "formal_accuracy": [
+    {
+      "condition_id": "real_only",
+      "mean_accuracy": 0.7144,
+      "std_accuracy_ddof1": 0.003143246729100335,
+      "paired_delta_pp_mean": 0.0,
+      "paired_delta_pp_std_ddof1": 0.0,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "accuracies": [
+        0.7116,
+        0.7138,
+        0.7178
+      ]
+    },
+    {
+      "condition_id": "random_50",
+      "mean_accuracy": 0.7508,
+      "std_accuracy_ddof1": 0.007369531871157073,
+      "paired_delta_pp_mean": 3.639999999999999,
+      "paired_delta_pp_std_ddof1": 0.834685569541009,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "accuracies": [
+        0.7462,
+        0.7593,
+        0.7469
+      ]
+    },
+    {
+      "condition_id": "clip_50",
+      "mean_accuracy": 0.7528,
+      "std_accuracy_ddof1": 0.007626925986267345,
+      "paired_delta_pp_mean": 3.839999999999999,
+      "paired_delta_pp_std_ddof1": 0.7727224598780613,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "accuracies": [
+        0.7461,
+        0.7611,
+        0.7512
+      ]
+    },
+    {
+      "condition_id": "random_150",
+      "mean_accuracy": 0.7505666666666667,
+      "std_accuracy_ddof1": 0.00584494083232097,
+      "paired_delta_pp_mean": 3.616666666666668,
+      "paired_delta_pp_std_ddof1": 0.6900966115938613,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "accuracies": [
+        0.7468,
+        0.7573,
+        0.7476
+      ]
+    },
+    {
+      "condition_id": "clip_150",
+      "mean_accuracy": 0.7526,
+      "std_accuracy_ddof1": 0.005768882040742379,
+      "paired_delta_pp_mean": 3.820000000000001,
+      "paired_delta_pp_std_ddof1": 0.6244997998398402,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "accuracies": [
+        0.7478,
+        0.759,
+        0.751
+      ]
+    }
+  ],
   "model_seal_sha256": "a608c3dc8c2c6f190e4a2293c346e5ecc3ae2ba45e057123aac5108ea4e4f34e",
-  "limitation": "Training reload-check predictions are not an estimate of generalization. G4 test evaluation, label audit and user trial remain outstanding."
+  "limitation": "Final predictions are available; C independent statistical review/figures, two-person label audit and non-author trial remain pending.",
+  "clip_zero_shot": {
+    "accuracy": 0.8821,
+    "evaluations": 1,
+    "timing": {
+      "load_seconds": 7.48700679999456,
+      "inference_seconds": 33.92823820000194,
+      "seconds": 41.41524599999684,
+      "reused_verified": false
+    }
+  },
+  "final_prediction_handoff": "g4/README.md"
 }

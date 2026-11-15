@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "run_id": "synthetic_v2",
+  "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+  "model_seal_sha256": "a608c3dc8c2c6f190e4a2293c346e5ecc3ae2ba45e057123aac5108ea4e4f34e",
+  "rows_total": 160000,
+  "official_test_images": 10000,
+  "classifier_predictions": 150000,
+  "clip_reference_predictions": 10000,
+  "official_classes": [
+    "airplane",
+    "automobile",
+    "bird",
+    "cat",
+    "deer",
+    "dog",
+    "frog",
+    "horse",
+    "ship",
+    "truck"
+  ],
+  "predictions": [
+    {
+      "condition_id": "real_only",
+      "seed": 0,
+      "rows": 10000,
+      "accuracy_recomputed": 0.7116,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/real_only_seed0.json",
+      "sha256": "89a15b725a5719a50c20282abc444978efb23e158f7e131337bf446154c944d9"
+    },
+    {
+      "condition_id": "random_50",
+      "seed": 0,
+      "rows": 10000,
+      "accuracy_recomputed": 0.7462,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/random_50_seed0.json",
+      "sha256": "6e11a2d327a95dcf54e0e050a44e19fa3d7615576d54303e11fbe1e1efe6d0fd"
+    },
+    {
+      "condition_id": "clip_50",
+      "seed": 0,
+      "rows": 10000,
+      "accuracy_recomputed": 0.7461,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/clip_50_seed0.json",
+      "sha256": "ffee61910f83773e5f2ea86af2ba7910792ea6d4509a2b8cb93f1554426e1eb1"
+    },
+    {
+      "condition_id": "random_150",
+      "seed": 0,
+      "rows": 10000,
+      "accuracy_recomputed": 0.7468,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/random_150_seed0.json",
+      "sha256": "dd99d6b571f2b86a64c9abb4753c81ad203408a67914e192ef1c889aad129d0e"
+    },
+    {
+      "condition_id": "clip_150",
+      "seed": 0,
+      "rows": 10000,
+      "accuracy_recomputed": 0.7478,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/clip_150_seed0.json",
+      "sha256": "8a0f8735cb28bed62f5a58dce14a86396ca491ef165d50f872704d86957d6a2c"
+    },
+    {
+      "condition_id": "real_only",
+      "seed": 1,
+      "rows": 10000,
+      "accuracy_recomputed": 0.7138,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/real_only_seed1.json",
+      "sha256": "dbee724cc8f83afc67f23ebf959117f264563602d8baa1872e7839f4bc6c4660"
+    },
+    {
+      "condition_id": "random_50",
+      "seed": 1,
+      "rows": 10000,
+      "accuracy_recomputed": 0.7593,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/random_50_seed1.json",
+      "sha256": "f5b7f0e616604fbddf91ee889493113a7ca5e49d0a3da36db667547925805b86"
+    },
+    {
+      "condition_id": "clip_50",
+      "seed": 1,
+      "rows": 10000,
+      "accuracy_recomputed": 0.7611,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/clip_50_seed1.json",
+      "sha256": "4a5b16de9c93d3c83853880848a275e2ef657ffcc5b965c361840110fe272eb1"
+    },
+    {
+      "condition_id": "random_150",
+      "seed": 1,
+      "rows": 10000,
+      "accuracy_recomputed": 0.7573,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/random_150_seed1.json",
+      "sha256": "b2f84825233108f4352d293a22d758162178202310bccea767e5d0364cef1155"
+    },
+    {
+      "condition_id": "clip_150",
+      "seed": 1,
+      "rows": 10000,
+      "accuracy_recomputed": 0.759,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/clip_150_seed1.json",
+      "sha256": "b2df87f277c4d4781a5952fa8b8b4420ff8596ca99eac8285ffe215c45f86c63"
+    },
+    {
+      "condition_id": "real_only",
+      "seed": 2,
+      "rows": 10000,
+      "accuracy_recomputed": 0.7178,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/real_only_seed2.json",
+      "sha256": "2652983cbaae8697b32e6fa76e4cc6492c7081504b10303145db2c01011cfad8"
+    },
+    {
+      "condition_id": "random_50",
+      "seed": 2,
+      "rows": 10000,
+      "accuracy_recomputed": 0.7469,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/random_50_seed2.json",
+      "sha256": "3cc5ae60decea9d4b3c05492c19a6befda2bc3be3781eb91af1ce02d703de7df"
+    },
+    {
+      "condition_id": "clip_50",
+      "seed": 2,
+      "rows": 10000,
+      "accuracy_recomputed": 0.7512,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/clip_50_seed2.json",
+      "sha256": "25593041b7b91cd93857cf68c3faf385705d724e3335080f469b521d04245459"
+    },
+    {
+      "condition_id": "random_150",
+      "seed": 2,
+      "rows": 10000,
+      "accuracy_recomputed": 0.7476,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/random_150_seed2.json",
+      "sha256": "03636e02cf704a9358c86d5768cda8a9d0ad4a111707ac6d45d07551bc35bef2"
+    },
+    {
+      "condition_id": "clip_150",
+      "seed": 2,
+      "rows": 10000,
+      "accuracy_recomputed": 0.751,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/clip_150_seed2.json",
+      "sha256": "139a3ac52759be0f057976c800cf4ee96b185f6910b5fee2018c0d0b8f6628a6"
+    },
+    {
+      "condition_id": "clip_zero_shot",
+      "seed": null,
+      "rows": 10000,
+      "accuracy_recomputed": 0.8821,
+      "relative_path": "evaluation/20261115T133443_199162Z/predictions/clip_zero_shot.json",
+      "sha256": "bc685340d5965ea7782d97100c92e7883fbac74475227d58bb2562c9ee2de364"
+    }
+  ],
+  "csv": {
+    "archive_member": "exports/predictions_long.csv",
+    "sha256": "0ce5859f9d91a6e06142b67f920d9963f936660ce27175c046495d7ac28f67cd",
+    "bytes": 17900085,
+    "seed_for_clip_reference": "empty CSV field; one zero-shot reference, not three independent runs"
+  },
+  "raw_json_paths_relative_to": "synthetic_v2 run root",
+  "accuracy_units": "fraction 0..1; paired gains use percentage points"
+}

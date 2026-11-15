@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-15",
+  "reviewer": "Codex on A machine under user direction",
+  "formal_evaluation_source_commit": "26e107feba6c4c4c5f447f84cada707e140d738c",
+  "pull_requests_merged": false,
+  "prs": [
+    {
+      "number": 1,
+      "url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/pull/1",
+      "author": "careless-Snow",
+      "head_sha": "5bcd840c981490e8926e8c45da8e45dc61f0099f",
+      "role_in_submission": "B",
+      "state_when_checked": "open",
+      "review_scope": "PR description and changed-file list; inspected configuration and unified CLI patches; B implementation/tests not independently executed in this review",
+      "integration_status": "Superseded by B PR3; closed without merge during this review",
+      "findings": [
+        "Submitted development configuration is draft synthetic_v1; current formal run is frozen synthetic_v2",
+        "Development head settings include 200 full-batch steps, momentum 0 and no feature normalization; current sealed protocol uses 500 updates, momentum 0.9, class-balanced sampling and L2 features",
+        "Changes include the unified CLI/config and additional top-level experimental Python modules; direct integration would change the frozen execution-source set",
+        "Keep the independent development evidence and credit as submitted; do not replace or reinterpret it as the current 15-model formal experiment"
+      ],
+      "changes_included_in_g4": false,
+      "latest_state": "closed",
+      "closed_at": "2026-11-15T13:48:57Z",
+      "merged": false
+    },
+    {
+      "number": 2,
+      "url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/pull/2",
+      "author": "blacksheep429",
+      "head_sha": "4338cf5ab67cd14ee34e7a1a656cfd03a5ed2316",
+      "role_in_submission": "C",
+      "state_when_checked": "open",
+      "review_scope": "All three added-file patches; reran the exact two scripts from the submitted head in A environment",
+      "input_training_bundle_sha256": "4e47d820939622039a769cb97211ae6aac5c3f0885797e281e59b1d52256121f",
+      "rerun_status": "Both scripts exited 0",
+      "scripts": [
+        {
+          "path": "code/audits/02_clip_audit.py",
+          "source_sha256": "316d60101ddd98da8f3a5bd49b5929b5d2186cb7b95a166910971ebf8fd7ba9a",
+          "exit_code": 0
+        },
+        {
+          "path": "code/audits/03_stats_audit.py",
+          "source_sha256": "dcb02153dccbd858cbda4bfd569fd438d2ed5cf92ac0296515584957195a53ca",
+          "exit_code": 0
+        }
+      ],
+      "limits": [
+        "Stored-record selection consistency; no independent CLIP re-inference or regeneration of the random permutation",
+        "Statistics script validates formulas using simulated data; C analysis of actual G4 predictions remains pending"
+      ],
+      "changes_included_in_g4": false
+    },
+    {
+      "number": 3,
+      "url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/pull/3",
+      "author": "careless-Snow",
+      "head_sha": "b2e0becb2f3247d0324d0984ebf06be5e9b5906c",
+      "role_in_submission": "B",
+      "state_when_checked": "open",
+      "merged": false,
+      "changes_included_in_g4": false,
+      "review_scope": "Current file list, independent review script, reported summary/evidence and documentation; full B script not re-executed in its separate CPU environment",
+      "reported_by_B": {
+        "protocol": "0.4-frozen",
+        "indexed_files_checked": 3001,
+        "real_images_checked": 598,
+        "replayed_heads": 15,
+        "updates_per_head": 500,
+        "training_reference_predictions": 3000,
+        "head_max_weight_difference": 4.76837158203125e-07,
+        "feature_max_abs_difference": 0.0002012699842453003,
+        "predeclared_feature_tolerance": 1e-05,
+        "strict_feature_match": false,
+        "training_reference_prediction_changes_using_cpu_features": 0,
+        "status": "completed_with_feature_numerical_finding"
+      },
+      "a_training_only_diagnostic": "b_pr3_precision_diagnostic.json",
+      "a_diagnostic_observations": {
+        "training_images": 8,
+        "views": 32,
+        "default_cuda_matches_original_cache_bitwise": true,
+        "cpu_vs_original_max_abs_error": 0.0001016855239868164,
+        "cuda_tf32_disabled_vs_cpu_max_abs_error": 7.450580596923828e-07
+      },
+      "assessment": "Aligned with frozen protocol and retains a genuine numerical finding. The controlled A training-only sample supports a cuDNN TF32 precision explanation for that sample; it does not turn the full B strict-threshold result into a pass. No sealed artifacts or G4 outputs changed.",
+      "integration_notes": [
+        "New review tool is under code/reviews; top-level frozen experimental sources unchanged",
+        "Before merging, reconcile shared progress/report edits with newly completed G4 and identify contributors by GitHub/name rather than chat-local pronouns",
+        "Keep B original thresholds, first failures and stated limits; retain evidence and Codex assistance attribution"
+      ]
+    }
+  ],
+  "latest_checked_utc": "2026-11-15T13:56:21.257302+00:00"
+}

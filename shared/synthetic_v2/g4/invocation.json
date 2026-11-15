@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "status": "success",
+  "run_id": "synthetic_v2",
+  "mode": "final_test",
+  "started_utc": "2026-11-15T13:34:41.485923+00:00",
+  "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+  "model_seal_sha256": "a608c3dc8c2c6f190e4a2293c346e5ecc3ae2ba45e057123aac5108ea4e4f34e",
+  "code_sha256": {
+    "a_protocol.py": "120d4811e6fb25a1c54d7b2694dc1cb598782a04a8a1bdb4a3338994fa045405",
+    "a_runtime.py": "0f32dc8d6c18650a9eb25c4406348b884af9ee3ad8aecd832bff461788472742",
+    "classifier.py": "2047e236c48cbaec3a7cdb777599e047c0ff04e7cf8a418cc0942ff369e86bc0",
+    "data_features.py": "61ec30afae7abdf005a47c6d27425cebf16692b8c58922ee5bd4c508e4ca27a6",
+    "evaluation.py": "198d516bf076237de7a170e4030ee54dcbb45dc2907eb02e83f67aa31638e43a",
+    "formal.py": "055835b896f702e66467257170450afd46878524664b3f91c258ea08235cd45f",
+    "selection.py": "bdf8ac7cb9868ac28e16c1b34f76486844daa0493a173517dcbb96527af6b0e3",
+    "smoke.py": "f70b3bb4cd0b72181b0fd804cd2da9d6992888436f864efe3ef13280a71a7989",
+    "toolkit.py": "0bfc67c38b638edf3d5d707c1e887e43f4141b64a4ed0b2fa0da39e5499b9091"
+  },
+  "environment": {
+    "schema_version": 1,
+    "utc": "2026-11-15T13:34:41.544095+00:00",
+    "python": "3.12.14 (main, Sep  1 2026, 14:17:39) [MSC v.1944 64 bit (AMD64)]",
+    "executable": "<project .venv interpreter>",
+    "platform": "Windows-11-10.0.26100-SP0",
+    "packages": {
+      "torch": "2.9.1+cu128",
+      "torchvision": "0.24.1+cu128",
+      "diffusers": "0.35.2",
+      "transformers": "4.57.6",
+      "accelerate": "1.15.0",
+      "numpy": "2.5.4",
+      "pillow": "13.0.0",
+      "safetensors": "0.8.0",
+      "huggingface-hub": "0.36.2",
+      "hf-xet": "1.8.0",
+      "ftfy": "6.3.1",
+      "wcwidth": "0.8.2"
+    },
+    "code_commit": "26e107feba6c4c4c5f447f84cada707e140d738c",
+    "worktree_dirty": false,
+    "source_sha256": {
+      "a_protocol.py": "120d4811e6fb25a1c54d7b2694dc1cb598782a04a8a1bdb4a3338994fa045405",
+      "a_runtime.py": "0f32dc8d6c18650a9eb25c4406348b884af9ee3ad8aecd832bff461788472742",
+      "classifier.py": "2047e236c48cbaec3a7cdb777599e047c0ff04e7cf8a418cc0942ff369e86bc0",
+      "data_features.py": "61ec30afae7abdf005a47c6d27425cebf16692b8c58922ee5bd4c508e4ca27a6",
+      "evaluation.py": "198d516bf076237de7a170e4030ee54dcbb45dc2907eb02e83f67aa31638e43a",
+      "formal.py": "055835b896f702e66467257170450afd46878524664b3f91c258ea08235cd45f",
+      "selection.py": "bdf8ac7cb9868ac28e16c1b34f76486844daa0493a173517dcbb96527af6b0e3",
+      "smoke.py": "f70b3bb4cd0b72181b0fd804cd2da9d6992888436f864efe3ef13280a71a7989",
+      "test_a_protocol.py": "9f48b5e9d66af96bd9f50cf6fa0c0d4d085b77a047850243f98368bb77251a55",
+      "test_g2.py": "035ff3a63875e52ce65acad8f589d339665624857bb65bac451c0cb5a87f8006",
+      "test_g3.py": "6fcf3505c13ca39e10999a34e7b7584061464b4be8e1fd5fecfd1d2083f98675",
+      "toolkit.py": "0bfc67c38b638edf3d5d707c1e887e43f4141b64a4ed0b2fa0da39e5499b9091"
+    }
+  },
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+    "total_memory_bytes": 12792365056,
+    "cuda_runtime": "12.8",
+    "driver": "621.01",
+    "cuda_operation": {
+      "torch": "2.9.1+cu128",
+      "cuda_runtime": "12.8",
+      "device": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+      "capability": [
+        12,
+        0
+      ],
+      "compiled_architectures": [
+        "sm_70",
+        "sm_75",
+        "sm_80",
+        "sm_86",
+        "sm_90",
+        "sm_100",
+        "sm_120"
+      ],
+      "matrix_check": "passed",
+      "seconds": 9.135691499999666
+    }
+  },
+  "command": [
+    ".venv/Scripts/python.exe",
+    "code/toolkit.py",
+    "evaluate",
+    "--final"
+  ],
+  "input_archive_md5": "c58f30108f718f92721af3b95e74349a",
+  "console_path": "logs/g4_console_20261115T133441_485923Z.log",
+  "test_labels_read_before_this_invocation": false,
+  "exit_code": 0,
+  "finished_utc": "2026-11-15T13:38:23.110421+00:00",
+  "cli_wall_seconds": 221.51596199999767,
+  "console_sha256": "22d8b548e6f625ecf3c7c17749a944a2727d5fd83cb996456a21a7216a92401c",
+  "report_path": "evaluation/20261115T133443_199162Z/report.json",
+  "report_sha256": "294351fef92936fcd3a379c3647b4150e96dcd672fbcd3dea6f49ab42af18e9d",
+  "final_test_evaluated": true,
+  "official_test_labels_read": true,
+  "prediction_files": 16,
+  "source_record_sha256": "62dc1de7ed7136d0d25737eb954bbc5a873bde2697006285a62d8b49ea2493ca",
+  "sanitization": "Original-machine executable path redacted; all package/source/device/timing fields unchanged."
+}

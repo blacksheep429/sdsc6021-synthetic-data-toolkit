@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "status": "diagnostic_complete",
+  "pr_number": 3,
+  "source_commit": "26e107feba6c4c4c5f447f84cada707e140d738c",
+  "sample_rule": "First complete original training batch in seed0 manifest; batch size read from frozen config before inference",
+  "image_ids": [
+    "real_train_22308",
+    "real_train_12073",
+    "real_train_02322",
+    "real_train_46740",
+    "real_train_30487",
+    "real_train_34646",
+    "real_train_14945",
+    "real_train_07434"
+  ],
+  "images": 8,
+  "views": 32,
+  "official_test_data_used": false,
+  "default_backends_observed_in_diagnostic_process": {
+    "cudnn_allow_tf32": true,
+    "cuda_matmul_allow_tf32": false,
+    "float32_matmul_precision": "highest",
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "cudnn_version": 91002
+  },
+  "default_cuda_vs_sealed": {
+    "max_abs_error": 0.0,
+    "minimum_cosine_similarity": 0.9999998807907104,
+    "bit_identical": true
+  },
+  "cpu_vs_sealed": {
+    "max_abs_error": 0.0001016855239868164,
+    "minimum_cosine_similarity": 0.9999998807907104,
+    "bit_identical": false
+  },
+  "cuda_tf32_disabled_vs_cpu": {
+    "max_abs_error": 7.450580596923828e-07,
+    "minimum_cosine_similarity": 0.9999998211860657,
+    "bit_identical": false
+  },
+  "cuda_default_vs_cpu": {
+    "max_abs_error": 0.0001016855239868164,
+    "minimum_cosine_similarity": 0.9999998807907104,
+    "bit_identical": false
+  },
+  "sealed_models_inputs_and_g4_pointer_unchanged": true,
+  "scope": "Backend diagnostic on training inputs only; no choice of settings or model based on final-test accuracy. Original execution did not explicitly log backend flags; inference about its defaults is supported only if diagnostic reproduces its cache."
+}

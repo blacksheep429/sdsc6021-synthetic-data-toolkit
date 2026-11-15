@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "status": "success",
+  "utc": "2026-11-15T13:45:17.983247+00:00",
+  "release_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/tag/g4-official-evaluation-v0.4",
+  "published_at": "2026-11-15T13:45:13Z",
+  "assets": [
+    {
+      "asset_name": "g4_predictions_and_run_records.zip",
+      "sha256": "91045de3b946dccd21d9b6810f06309b1f86dc09ba4d814a158a4f9c078f6807",
+      "bytes": 3980356,
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g4-official-evaluation-v0.4/g4_predictions_and_run_records.zip",
+      "anonymous_full_download_verified": true,
+      "github_asset_id": 751131180
+    },
+    {
+      "asset_name": "SHA256SUMS.txt",
+      "sha256": "f34e01d6e252356f4ef9dcec8f05fe0be73dd351c556e33f78a24c61b50f032e",
+      "bytes": 101,
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g4-official-evaluation-v0.4/SHA256SUMS.txt",
+      "anonymous_full_download_verified": true,
+      "github_asset_id": 751135276
+    }
+  ]
+}
