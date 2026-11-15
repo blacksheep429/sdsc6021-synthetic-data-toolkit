@@ -151,6 +151,9 @@ def verify_model_seal(config: dict,root: Path) -> dict:
     for row in seal["models"]:
         if file_hash(inside(root,row["relative_path"])) != row["sha256"]:
             raise ValueError("A sealed classifier changed")
+    if (file_hash(root/"manifests/selections.json") != seal["selection_manifest_sha256"]
+            or file_hash(root/"features/training_features.npz") != seal["feature_bundle_sha256"]):
+        raise ValueError("Sealed training inputs changed")
     return seal
 
 

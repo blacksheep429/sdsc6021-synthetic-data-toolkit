@@ -108,6 +108,8 @@ def evaluate_final(config: dict) -> dict:
         inference_start = time.perf_counter()
         for row in seal["models"]:
             checkpoint = torch.load(inside(root,row["relative_path"]),map_location="cpu",weights_only=True)
+            if checkpoint["condition_id"] != row["condition_id"] or checkpoint["seed"] != row["seed"]:
+                raise ValueError("Checkpoint identity differs from the sealed condition/seed")
             if checkpoint["mode"] != "main" or checkpoint["config_hash"] != config_hash(config) or checkpoint["classifier_config"] != config["classifier"] or checkpoint["classes"] != list(CLASSES):
                 raise ValueError("Final classifier preprocessing/config differs")
             head = torch.nn.Linear(512,10)
