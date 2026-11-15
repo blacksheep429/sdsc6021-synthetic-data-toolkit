@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "status": "success",
+  "utc": "2026-11-15T11:19:29.686975+00:00",
+  "run_id": "synthetic_v2",
+  "release_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/tag/g3-synthetic-v2-v0.4",
+  "published_at": "2026-11-15T11:17:58Z",
+  "assets": [
+    {
+      "asset_name": "candidate_images_class_00.zip",
+      "anonymous_status": 206,
+      "expected_bytes": 75742169,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_01.zip",
+      "anonymous_status": 206,
+      "expected_bytes": 94099165,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_02.zip",
+      "anonymous_status": 206,
+      "expected_bytes": 84127987,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_03.zip",
+      "anonymous_status": 206,
+      "expected_bytes": 88860492,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_04.zip",
+      "anonymous_status": 206,
+      "expected_bytes": 98598475,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_05.zip",
+      "anonymous_status": 206,
+      "expected_bytes": 90700157,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_06.zip",
+      "anonymous_status": 206,
+      "expected_bytes": 87280551,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_07.zip",
+      "anonymous_status": 206,
+      "expected_bytes": 91176214,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_08.zip",
+      "anonymous_status": 206,
+      "expected_bytes": 82000156,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_09.zip",
+      "anonymous_status": 206,
+      "expected_bytes": 95070975,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "training_bundle.zip",
+      "anonymous_status": 206,
+      "expected_bytes": 30208113,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "label_audit_packet.zip",
+      "anonymous_status": 206,
+      "expected_bytes": 44594834,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "G3_HANDOFF.md",
+      "anonymous_status": 206,
+      "expected_bytes": 5965,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "stage_costs.json",
+      "anonymous_status": 206,
+      "expected_bytes": 2789,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "handoff_restore_check.json",
+      "anonymous_status": 206,
+      "expected_bytes": 5528,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "SHA256SUMS.txt",
+      "anonymous_status": 206,
+      "expected_bytes": 1391,
+      "first_byte_received": true,
+      "authorization_header_present": false,
+      "server_sha256_verified": true
+    }
+  ],
+  "full_anonymous_downloads": [
+    {
+      "asset_name": "training_bundle.zip",
+      "sha256": "4e47d820939622039a769cb97211ae6aac5c3f0885797e281e59b1d52256121f",
+      "bytes": 30208113,
+      "anonymous": true
+    },
+    {
+      "asset_name": "SHA256SUMS.txt",
+      "sha256": "9a436d280120556606e37d9da0c59614263e0c454a7fdf6901c2787a7c6c0b7d",
+      "bytes": 1391,
+      "anonymous": true
+    }
+  ],
+  "execution_tag_commit": "c5763166b2fe752e2257e7fb35039dc3ac1e0be7",
+  "scope": "Public artifact access and byte integrity only; no official test labels read or human evaluation performed."
+}

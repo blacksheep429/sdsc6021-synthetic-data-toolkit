@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "run_id": "synthetic_v2",
+  "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
+  "status": "published_and_anonymously_download_verified",
+  "release_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/tag/g3-synthetic-v2-v0.4",
+  "tag": "g3-synthetic-v2-v0.4",
+  "source_commit": "c5763166b2fe752e2257e7fb35039dc3ac1e0be7",
+  "published_at": "2026-11-15T11:17:58Z",
+  "assets": [
+    {
+      "asset_name": "candidate_images_class_00.zip",
+      "relative_path": "deliverables/g3_synthetic_v2/candidate_images_class_00.zip",
+      "bytes": 75742169,
+      "sha256": "6569e85c335ce776683e827fbaf7bb055fd4e427993048451ca1d484bf8694b8",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/candidate_images_class_00.zip",
+      "github_asset_id": 750663664,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_01.zip",
+      "relative_path": "deliverables/g3_synthetic_v2/candidate_images_class_01.zip",
+      "bytes": 94099165,
+      "sha256": "32e06164d423f7daa3278c2db1a6c4611a779386bb1eae09a6c6f6e979882e2a",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/candidate_images_class_01.zip",
+      "github_asset_id": 750706291,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_02.zip",
+      "relative_path": "deliverables/g3_synthetic_v2/candidate_images_class_02.zip",
+      "bytes": 84127987,
+      "sha256": "d0a97c23f2754d3babb55f6fe9f52e08f77b3ea8feb04e06a82969a925f490ec",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/candidate_images_class_02.zip",
+      "github_asset_id": 750697334,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_03.zip",
+      "relative_path": "deliverables/g3_synthetic_v2/candidate_images_class_03.zip",
+      "bytes": 88860492,
+      "sha256": "06103f5caec7363b681871bbd24a7683990fc815279f50943df44ad54362d834",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/candidate_images_class_03.zip",
+      "github_asset_id": 750711857,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_04.zip",
+      "relative_path": "deliverables/g3_synthetic_v2/candidate_images_class_04.zip",
+      "bytes": 98598475,
+      "sha256": "ca00b8a12745ad107d647976207bd380da8f5135dfd8c76aae308a30decf8e50",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/candidate_images_class_04.zip",
+      "github_asset_id": 750745727,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_05.zip",
+      "relative_path": "deliverables/g3_synthetic_v2/candidate_images_class_05.zip",
+      "bytes": 90700157,
+      "sha256": "a2189614f140147745a7ec5b332af07ee8a38ebf7738d5101b0ab3a5f570f09a",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/candidate_images_class_05.zip",
+      "github_asset_id": 750742336,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_06.zip",
+      "relative_path": "deliverables/g3_synthetic_v2/candidate_images_class_06.zip",
+      "bytes": 87280551,
+      "sha256": "d9163a108331226db9653d570413507d8f9fc5d6596fdba15825112f71e4e24f",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/candidate_images_class_06.zip",
+      "github_asset_id": 750712204,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_07.zip",
+      "relative_path": "deliverables/g3_synthetic_v2/candidate_images_class_07.zip",
+      "bytes": 91176214,
+      "sha256": "81490fd34119c8c4d1635fa317abc627804dd568dcc5d9fd1fd0ca3100788716",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/candidate_images_class_07.zip",
+      "github_asset_id": 750746064,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_08.zip",
+      "relative_path": "deliverables/g3_synthetic_v2/candidate_images_class_08.zip",
+      "bytes": 82000156,
+      "sha256": "395b20d09f4007efff16409bb7617dee1108867829a44f7686224329de9d85e5",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/candidate_images_class_08.zip",
+      "github_asset_id": 750746329,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "candidate_images_class_09.zip",
+      "relative_path": "deliverables/g3_synthetic_v2/candidate_images_class_09.zip",
+      "bytes": 95070975,
+      "sha256": "d8e6472bd72d620d086ee61e8628f32b7eb538e36dbab67e00f5f9aeb7c20e82",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/candidate_images_class_09.zip",
+      "github_asset_id": 750742642,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "training_bundle.zip",
+      "relative_path": "deliverables/g3_synthetic_v2/training_bundle.zip",
+      "bytes": 30208113,
+      "sha256": "4e47d820939622039a769cb97211ae6aac5c3f0885797e281e59b1d52256121f",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/training_bundle.zip",
+      "github_asset_id": 750730367,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "label_audit_packet.zip",
+      "relative_path": "deliverables/audit_packet_04/label_audit_packet.zip",
+      "bytes": 44594834,
+      "sha256": "1c12360f61baf1beaf8af2f878900db751a8e5f79b7d09c8d3c49b5d39c0f85b",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/label_audit_packet.zip",
+      "github_asset_id": 750746667,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "G3_HANDOFF.md",
+      "relative_path": "deliverables/g3_synthetic_v2/G3_HANDOFF.md",
+      "bytes": 5965,
+      "sha256": "ee7a620a0cce047584d4f8191d9237fbdc46b0db0a3e5cfaf4937d0c9c18160f",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/G3_HANDOFF.md",
+      "github_asset_id": 750746829,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "stage_costs.json",
+      "relative_path": "deliverables/g3_synthetic_v2/stage_costs.json",
+      "bytes": 2789,
+      "sha256": "69fa3fe64fb86c3d0972142b7509ea40fdd499f5e8b19a6041e311a3a7726dcc",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/stage_costs.json",
+      "github_asset_id": 750703810,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "handoff_restore_check.json",
+      "relative_path": "deliverables/g3_synthetic_v2/handoff_restore_check.json",
+      "bytes": 5528,
+      "sha256": "e009aebdcd9387311540ff98440e64569f65d44031b49b65286673a29865d0b2",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/handoff_restore_check.json",
+      "github_asset_id": 750746887,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    },
+    {
+      "asset_name": "SHA256SUMS.txt",
+      "relative_path": "deliverables/g3_synthetic_v2/SHA256SUMS.txt",
+      "bytes": 1391,
+      "sha256": "9a436d280120556606e37d9da0c59614263e0c454a7fdf6901c2787a7c6c0b7d",
+      "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/SHA256SUMS.txt",
+      "github_asset_id": 750746952,
+      "access": "github_release_public",
+      "server_sha256_verified": true
+    }
+  ]
+}

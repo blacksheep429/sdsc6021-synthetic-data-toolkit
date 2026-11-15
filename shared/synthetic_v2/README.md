@@ -8,6 +8,8 @@
 
 [GitHub Release：G3 数据交接](https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/tag/g3-synthetic-v2-v0.4)。上传状态及精确下载地址以 [artifacts.json](artifacts.json) 为准；草稿不算已交付。
 
+已发布的 16 个附件均通过匿名访问检查；训练包及校验清单已完整下载核对 SHA-256。[附件总索引](release_assets.json)记录文件大小、哈希和下载地址；[公开下载证明](public_download_check.json)记录实际检查。
+
 | 附件 | 内容 | 谁需要 |
 |---|---|---|
 | `candidate_images_class_00.zip` 至 `09.zip` | 每类 200 张原始 PNG，共 2,000 张；编号沿用 CIFAR-10 官方类别顺序 | A 保管，B/C 检查数据时下载 |

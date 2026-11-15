@@ -2,7 +2,7 @@
 
 面向 20-shot 图像分类的合成数据增强工具：生成补充图片、选择样本、训练分类器，并评估真实测试效果。
 
-> 当前：synthetic_v2 的 G3 已完成，包含 2,000 张候选图和 15 个封存分类头；[团队交接入口](shared/synthetic_v2/README.md)提供图片、特征和模型的下载说明与核验证据。最终测试及真人审计尚未开始，上传/交付状态见 progress.md。
+> 当前：A 的 G3 工程、生成与交接完成。2,000 张候选图、便携特征和 15 个封存分类头已在 [GitHub Release](https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/tag/g3-synthetic-v2-v0.4)公开，下载验证通过；[团队交接入口](shared/synthetic_v2/README.md)说明按分工下载和使用。最终测试及真人审计尚未开始，实际进度见 progress.md。
 
 ## 阅读入口
 

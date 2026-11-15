@@ -1,5 +1,5 @@
 {
-  "status": "prepared_not_delivered_or_annotated",
+  "status": "materials_delivered_annotations_not_started",
   "images": 100,
   "annotators_confirmed": 0,
   "relative_path": "deliverables/audit_packet_04/label_audit_packet.zip",
@@ -7,6 +7,8 @@
   "bytes": 44594834,
   "config_hash": "5380e7f962bb3646c6ff81148dd3d3ff2f96d1af97f008a774454af03eacd5ad",
   "sampling_seed": 20261118,
-  "access": "local_only_not_delivered",
-  "arrangement": "user_will_arrange_later"
+  "access": "github_release_public",
+  "arrangement": "user_will_arrange_later",
+  "download_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/download/g3-synthetic-v2-v0.4/label_audit_packet.zip",
+  "release_url": "https://github.com/kanekikenny/sdsc6021-synthetic-data-toolkit/releases/tag/g3-synthetic-v2-v0.4"
 }
