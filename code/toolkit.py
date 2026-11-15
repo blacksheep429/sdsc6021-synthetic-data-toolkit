@@ -1,4 +1,4 @@
-"""Single project CLI for environment, generation and G2 development verification."""
+"""Single project CLI for generation, training and gated final evaluation."""
 from __future__ import annotations
 
 import argparse
@@ -40,6 +40,17 @@ def main() -> int:
         elif args.command == "smoke":
             from smoke import smoke
             result = smoke(config)
+        elif args.command == "evaluate":
+            if not args.final:
+                parser.error("Official test evaluation requires --final and 15 sealed G3 models")
+            from evaluation import evaluate_final
+            result = evaluate_final(config)
+        elif args.command in {"select","features","train"}:
+            from formal import select_main,features_main,train_main
+            result = {"select":select_main,"features":features_main,"train":train_main}[args.command](config)
+        elif args.command == "summarize" and not args.run_dir:
+            from formal import export_formal
+            result = export_formal(config)
         elif args.command in {"freeze","summarize"}:
             if not args.run_dir:
                 parser.error("--run-dir is required")

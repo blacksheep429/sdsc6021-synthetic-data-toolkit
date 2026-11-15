@@ -29,7 +29,7 @@ def score_images(config: dict, run_dir: Path, records: list[dict]) -> tuple[list
             raise ValueError("CLIP input image changed")
     fingerprint = config_hash({"model":clip_config,"texts":texts,"weights_sha256":weights_sha,
         "packages":{name:importlib.metadata.version(name) for name in ("torch","transformers","pillow")},
-        "inputs":[(r["image_id"],r["sha256"],r["class_id"]) for r in records],
+        "inputs":[(r["image_id"],r["sha256"],r.get("class_id")) for r in records],
         "source_sha256":file_hash(Path(__file__))})
     path = run_dir / "manifests/clip_scores.json"
     if path.exists():
@@ -56,9 +56,9 @@ def score_images(config: dict, run_dir: Path, records: list[dict]) -> tuple[list
             if probabilities.shape != (len(group),10) or not np.isfinite(probabilities).all() or not np.allclose(probabilities.sum(1),1):
                 raise ValueError("CLIP probabilities are invalid")
             for record,p in zip(group,probabilities):
-                scores.append({"schema_version":1,"image_id":record["image_id"],"class_id":record["class_id"],
+                scores.append({"schema_version":1,"image_id":record["image_id"],"class_id":record.get("class_id"),
                     "image_sha256":record["sha256"],"probabilities":list(map(float,p)),
-                    "target_confidence":float(p[record["class_id"]]),"predicted_class_id":int(p.argmax())})
+                    "target_confidence":float(p[record["class_id"]]) if "class_id" in record else None,"predicted_class_id":int(p.argmax())})
         torch.cuda.synchronize()
         timing = {"load_seconds":load_seconds,"inference_seconds":time.perf_counter()-inference_start,
                   "seconds":time.perf_counter()-start,"reused_verified":False}

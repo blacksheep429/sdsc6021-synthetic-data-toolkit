@@ -96,9 +96,11 @@ def paired_split(labels: np.ndarray, seed: int, total: int = 20, dev: int = 0) -
     return train, development
 
 
-def materialize_real(config: dict, run_dir: Path, *, smoke: bool) -> tuple[list[dict], dict]:
+def materialize_real(config: dict, run_dir: Path, *, smoke: bool, seed: int | None = None) -> tuple[list[dict], dict]:
     images, labels, provenance = cifar_train()
-    seed = config["smoke"]["split_seed"] if smoke else config["dataset"]["split_seeds"][0]
+    seed = config["smoke"]["split_seed"] if smoke else (config["dataset"]["split_seeds"][0] if seed is None else seed)
+    if not smoke and seed not in config["dataset"]["split_seeds"]:
+        raise ValueError("Unknown paired split seed")
     dev_count = config["smoke"]["dev_per_class"] if smoke else 0
     train, development = paired_split(labels, seed, config["dataset"]["real_per_class"], dev_count)
     records = []
@@ -146,7 +148,7 @@ def extract_features(config: dict, run_dir: Path, records: list[dict]) -> tuple[
     for record in records:
         if file_hash(inside(run_dir,record["relative_path"])) != record["sha256"]:
             raise ValueError("Feature input image changed")
-        views = 1 if record.get("split") == "dev" else config["classifier"]["train_views"]
+        views = 1 if record.get("split") in {"dev","test"} else config["classifier"]["train_views"]
         key = feature_key(config,record,views)
         path, meta = cache / (key+".npz"), cache / (key+".json")
         if path.exists() or meta.exists():
@@ -196,7 +198,7 @@ def extract_features(config: dict, run_dir: Path, records: list[dict]) -> tuple[
         pending = []
         try:
             # Batch whole images, keeping all views of an image together.
-            per_batch = max(1,cfg["feature_batch_size"]//cfg["train_views"])
+            per_batch = max(1,cfg["feature_batch_size"]//max(item[1] for item in todo))
             for first in range(0,len(todo),per_batch):
                 group = todo[first:first+per_batch]
                 tensors, counts = [], []

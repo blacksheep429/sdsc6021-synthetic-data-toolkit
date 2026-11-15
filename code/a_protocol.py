@@ -59,6 +59,7 @@ def load_config(path: str | Path) -> dict:
         (gen["dtype"] == "float16" and gen["variant"] == "fp16" and gen["generator_device"] == "cpu", "Unsupported precision/variant/RNG"),
         (gen["scheduler"] == "DPMSolverMultistepScheduler", "Unsupported scheduler"),
         (config["protocol_status"] in {"draft", "frozen"}, "Unknown protocol status"),
+        (1 <= gen.get("batch_size",1) <= 4, "Generation batch must be between 1 and 4"),
     )
     for valid, message in checks:
         if not valid:
@@ -107,6 +108,13 @@ def proposal_hash(config: dict) -> str:
 
 def class_texts(config: dict, template: str) -> list[str]:
     return [template.format(class_name=name) for name in config["dataset"].get("class_phrases", CLASSES)]
+
+
+def generation_batches(items: list, size: int) -> list[list]:
+    """Keep original batch membership fixed when resuming a partial run."""
+    if not 1 <= size <= 4:
+        raise ValueError("Invalid generation batch size")
+    return [items[i:i+size] for i in range(0,len(items),size)]
 
 
 def candidate_plan(config: dict, *, smoke_per_class: int | None = None) -> list[dict]:

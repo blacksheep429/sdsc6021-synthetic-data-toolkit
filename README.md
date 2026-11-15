@@ -2,7 +2,7 @@
 
 面向 20-shot 图像分类的合成数据增强工具：生成补充图片、选择样本、训练分类器，并评估真实测试效果。
 
-> 当前：G2 小规模完整试跑已通过，配置已冻结；正式 2,000 张生成、15 个分类器及最终测试评估尚未开始。具体证据与后续工作见 progress.md。
+> 当前：正在推进 G3；正式入口和恢复检查已补齐，先重新验证并冻结 0.3 配置，再开始批量生成和训练。最终测试评估尚未开始，具体证据见 progress.md。
 
 ## 阅读入口
 
@@ -45,4 +45,4 @@
 
 环境使用 Python 3.12.14。重建时用 Python 3.12 创建 .venv，再依次安装 requirements-gpu.txt（官方 cu128 索引）和 requirements.txt（其余固定版本）；pip 命令加 --disable-pip-version-check。本机安装曾复用已有 CUDA 分发包，详细复制和校验记录保留在本地 runs/_cache/。
 
-`doctor --models` 检查 SD1.5 出图、CLIP 打分与冻结 ResNet 特征；首次缺少缓存时需要下载权重。`smoke` 每次保留独立证据并复用经过校验的生成/特征缓存。`freeze --run-dir <本地试跑目录>` 只接受完整检查和十类样图审阅通过的当前配置/代码；`summarize --run-dir <目录>` 导出团队共享快照。正式阶段的选择、特征、训练及最终评估命令仍待 G3/G4 集成。
+`doctor --models` 检查 SD1.5 出图、CLIP 打分与冻结 ResNet 特征；首次缺少缓存时需要下载权重。`smoke` 保留独立证据并复用经过校验的生成/特征缓存；`freeze --run-dir <本地试跑目录>` 接受完整检查和十类样图审阅通过的当前配置/代码。`select/features/train` 为正式阶段入口，`summarize` 导出正式共享快照，加 --run-dir 则导出指定 smoke。G4 的 evaluate --final 要求 15 个封存模型，本轮未执行最终测试。

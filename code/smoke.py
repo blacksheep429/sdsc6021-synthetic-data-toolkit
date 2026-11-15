@@ -168,7 +168,7 @@ def freeze(config: dict, config_path: Path, run_dir: Path) -> dict:
     shared_gate = ROOT / "shared" / ("g2_smoke_"+run_dir.name) / "g2_gate.json"
     atomic_json(shared_gate,gate)
     frozen = copy.deepcopy(config)
-    frozen.update(protocol_status="frozen",protocol_version="0.2-frozen")
+    frozen.update(protocol_status="frozen",protocol_version=config["protocol_version"].rsplit("-",1)[0]+"-frozen")
     frozen["gates"] = {"g2_passed":True,"g2_evidence":{"path":str(shared_gate.relative_to(ROOT)).replace("\\","/"),
                                                         "sha256":file_hash(gate_path)}}
     require_g2(frozen)

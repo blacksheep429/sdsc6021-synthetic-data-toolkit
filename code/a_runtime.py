@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import gc
+import io
+import hashlib
 import importlib.metadata
 import json
 import os
@@ -13,7 +15,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from a_protocol import (ROOT, CLASSES, atomic_json, candidate_plan, class_texts, config_hash,
+from a_protocol import (ROOT, CLASSES, atomic_json, candidate_plan, class_texts, config_hash, generation_batches,
                         file_hash, inside, require_g2, verified_item)
 
 
@@ -126,6 +128,8 @@ def generate(config: dict, *, smoke: bool, limit: int = 1, per_class: int | None
         record = verified_item(run_dir, item, fingerprint)
         (records if record else todo).append(record if record else item)
     reused = len(records)
+    known = {r["image_id"]:r for r in records}
+    batches = generation_batches(items,config["generation"].get("batch_size",1))
     load_seconds = 0.0
     warmup_seconds = 0.0
     peak_memory = 0
@@ -139,47 +143,73 @@ def generate(config: dict, *, smoke: bool, limit: int = 1, per_class: int | None
         torch.cuda.synchronize()
         load_seconds = time.perf_counter() - start
         gen = config["generation"]
+        active_id = "warmup"
         try:
             torch.cuda.reset_peak_memory_stats()
             if gen.get("warmup_steps", 0):
                 start = time.perf_counter()
                 with torch.inference_mode():
-                    pipe(items[0]["prompt"], negative_prompt=gen["negative_prompt"],
+                    pipe([i["prompt"] for i in batches[0]], negative_prompt=[gen["negative_prompt"]]*len(batches[0]),
                          num_inference_steps=gen["warmup_steps"], guidance_scale=gen["guidance_scale"],
                          width=gen["width"], height=gen["height"],
-                         generator=torch.Generator(device="cpu").manual_seed(gen["seed_base"] - 1))
+                         generator=[torch.Generator(device="cpu").manual_seed(gen["seed_base"]-1-i) for i in range(len(batches[0]))])
                 torch.cuda.synchronize()
                 warmup_seconds = time.perf_counter() - start
-            for item in todo:
-                print(f"[generate] {item['image_id']} seed={item['generation_seed']}", flush=True)
+            for batch_index,batch in enumerate(batches):
+                if all(i["image_id"] in known for i in batch):
+                    continue
+                active_id = ",".join(i["image_id"] for i in batch)
+                print(f"[generate] batch={batch_index+1}/{len(batches)} {active_id}", flush=True)
                 torch.cuda.synchronize()
                 start = time.perf_counter()
                 with torch.inference_mode():
-                    output = pipe(item["prompt"], negative_prompt=gen["negative_prompt"],
+                    output = pipe([i["prompt"] for i in batch], negative_prompt=[gen["negative_prompt"]]*len(batch),
                                   num_inference_steps=gen["steps"], guidance_scale=gen["guidance_scale"],
                                   width=gen["width"], height=gen["height"],
-                                  generator=torch.Generator(device="cpu").manual_seed(item["generation_seed"]))
-                image = output.images[0].convert("RGB")
-                pixels = np.asarray(image)
-                if image.size != (gen["width"], gen["height"]) or int(pixels.max()) <= 1:
-                    raise RuntimeError(f"Invalid/black image: {item['image_id']}")
-                if output.nsfw_content_detected and output.nsfw_content_detected[0]:
-                    raise RuntimeError(f"Flagged output: {item['image_id']}; retain failure record")
-                path = inside(run_dir, item["relative_path"])
-                path.parent.mkdir(parents=True, exist_ok=True)
-                temporary = path.with_name(path.name + ".tmp")
-                image.save(temporary, format="PNG")
-                temporary.replace(path)
+                                  generator=[torch.Generator(device="cpu").manual_seed(i["generation_seed"]) for i in batch])
                 torch.cuda.synchronize()
-                record = dict(item, status="success", config_hash=fingerprint, sha256=file_hash(path),
-                              seconds=time.perf_counter() - start, mode="smoke" if smoke else "main")
-                atomic_json(inside(run_dir, f"manifests/items/{item['image_id']}.json"), record)
-                records.append(record)
+                batch_seconds = time.perf_counter()-start
+                images = [im.convert("RGB") for im in output.images]
+                if len(images) != len(batch):
+                    raise RuntimeError("Pipeline returned an incorrect batch size")
+                # Validate the entire batch before publishing any successful image.
+                for item,image,flag in zip(batch,images,output.nsfw_content_detected or [False]*len(batch)):
+                    if image.size != (gen["width"],gen["height"]) or int(np.asarray(image).max()) <= 1 or flag:
+                        raise RuntimeError(f"Invalid/black/flagged output: {item['image_id']}; no seed substitution")
+                for item,image in zip(batch,images):
+                    save_start = time.perf_counter()
+                    data = io.BytesIO()
+                    image.save(data,format="PNG")
+                    payload = data.getvalue()
+                    digest = hashlib.sha256(payload).hexdigest()
+                    if item["image_id"] in known:
+                        if known[item["image_id"]]["sha256"] != digest:
+                            raise RuntimeError("Partial batch regeneration changed a previously verified image")
+                        continue
+                    path = inside(run_dir,item["relative_path"])
+                    path.parent.mkdir(parents=True,exist_ok=True)
+                    temporary = path.with_name(path.name+".tmp")
+                    temporary.write_bytes(payload)
+                    temporary.replace(path)
+                    serialization_seconds = time.perf_counter()-save_start
+                    record = dict(item,status="success",config_hash=fingerprint,sha256=digest,
+                        seconds=batch_seconds/len(batch)+serialization_seconds,
+                        timing_definition="amortized batch inference plus own PNG serialization",
+                        batch_index=batch_index,batch_members=[i["image_id"] for i in batch],
+                        batch_inference_seconds=batch_seconds,serialization_seconds=serialization_seconds,
+                        mode="smoke" if smoke else "main")
+                    atomic_json(inside(run_dir,f"manifests/items/{item['image_id']}.json"),record)
+                    known[item["image_id"]] = record
+                    records.append(record)
+                atomic_json(run_dir/"generation_progress.json",{"status":"running","completed":len(known),
+                    "total":len(items),"config_hash":fingerprint,"batch_index":batch_index})
             peak_memory = torch.cuda.max_memory_allocated()
         except Exception as exc:
             stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S_%fZ")
             atomic_json(run_dir / "logs" / f"generation_failure_{stamp}.json", {
-                "status": "failed", "image_id": item["image_id"], "config_hash": fingerprint,
+                "status": "failed", "image_id_or_batch": active_id, "config_hash": fingerprint,
+                "elapsed_seconds":time.perf_counter()-stage_start,"pipeline_load_seconds":load_seconds,
+                "warmup_seconds":warmup_seconds,"completed":len(known),
                 "error_type": type(exc).__name__, "error": str(exc)})
             raise
         finally:
@@ -190,6 +220,7 @@ def generate(config: dict, *, smoke: bool, limit: int = 1, per_class: int | None
     summary = {"status": "success", "mode": "smoke" if smoke else "main", "config_hash": fingerprint,
                "run_dir": str(run_dir.relative_to(ROOT)), "count": len(records), "generated": len(todo),
                "reused_verified": reused, "pipeline_load_seconds": load_seconds,
+               "batch_size":config["generation"].get("batch_size",1),
                "warmup_seconds": warmup_seconds, "peak_cuda_allocated_bytes": peak_memory,
                "stage_seconds": time.perf_counter() - stage_start}
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S_%fZ")
