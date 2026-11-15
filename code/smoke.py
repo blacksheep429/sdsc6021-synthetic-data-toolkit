@@ -62,6 +62,12 @@ def smoke(config: dict) -> dict:
             raise ValueError("Generation resume did not verify every image")
         report["generation_resume"] = resumed
         origin = ROOT / first_generation["run_dir"]
+        report["generation_history"] = []
+        for path in sorted((origin/"logs").glob("generation_*.json")):
+            previous = json.loads(path.read_text(encoding="utf-8"))
+            if previous.get("status") == "success" and previous.get("config_hash") == report["config_hash"]:
+                report["generation_history"].append({"source":str(path.relative_to(ROOT)).replace("\\","/"),
+                    "sha256":file_hash(path),"summary":previous})
         originals = json.loads((origin / "manifests/candidates.json").read_text(encoding="utf-8"))
         synthetic = []
         for record in originals:

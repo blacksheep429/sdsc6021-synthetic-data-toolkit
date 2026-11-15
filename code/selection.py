@@ -1,6 +1,7 @@
 """Full CLIP probabilities, deterministic rankings and equal-size selections."""
 from __future__ import annotations
 import json
+import importlib.metadata
 import time
 from pathlib import Path
 
@@ -17,10 +18,17 @@ def score_images(config: dict, run_dir: Path, records: list[dict]) -> tuple[list
     start = time.perf_counter()
     clip_config = config["clip"]
     texts = class_texts(config,clip_config["text_template"])
+    from huggingface_hub import hf_hub_download
+    weights_path = Path(hf_hub_download(clip_config["model_id"],"pytorch_model.bin",
+                                      revision=clip_config["revision"],local_files_only=True))
+    weights_sha = file_hash(weights_path)
+    if weights_sha != "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f":
+        raise ValueError("CLIP checkpoint differs from the pinned official file")
     for record in records:
         if file_hash(inside(run_dir,record["relative_path"])) != record["sha256"]:
             raise ValueError("CLIP input image changed")
-    fingerprint = config_hash({"model":clip_config,"texts":texts,
+    fingerprint = config_hash({"model":clip_config,"texts":texts,"weights_sha256":weights_sha,
+        "packages":{name:importlib.metadata.version(name) for name in ("torch","transformers","pillow")},
         "inputs":[(r["image_id"],r["sha256"],r["class_id"]) for r in records],
         "source_sha256":file_hash(Path(__file__))})
     path = run_dir / "manifests/clip_scores.json"

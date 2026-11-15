@@ -33,8 +33,10 @@ class ProtocolTests(unittest.TestCase):
             self.assertEqual({row["real_per_class"] for row in subset}, {20})
 
     def test_full_generation_rejects_draft_and_unfrozen_classifier(self):
+        draft = copy.deepcopy(self.config)
+        draft["protocol_status"] = "draft"
         with self.assertRaises(ValueError):
-            require_g2(self.config)
+            require_g2(draft)
         altered = copy.deepcopy(self.config)
         altered.update(protocol_status="frozen")
         altered["gates"]["g2_passed"] = True

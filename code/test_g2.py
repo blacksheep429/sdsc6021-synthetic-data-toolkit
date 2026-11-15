@@ -4,6 +4,7 @@ import json
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 import numpy as np
@@ -14,7 +15,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parent))
 from a_protocol import (ROOT, atomic_json, candidate_plan, critical_sources, file_hash,
                         load_config, proposal_hash, require_g2)
 from classifier import objective, sample_schedule
-from data_features import feature_key, paired_split
+from data_features import feature_key, paired_split, extract_features
 from selection import make_selections
 
 
@@ -118,6 +119,24 @@ class ScientificChecks(unittest.TestCase):
         self.assertEqual(len(smoke),30)
         self.assertFalse(set(r["generation_seed"] for r in formal)&set(r["generation_seed"] for r in smoke))
         self.assertFalse(set(r["image_id"] for r in formal)&set(r["image_id"] for r in smoke))
+
+    def test_serialized_features_without_successful_freezing_proof_are_rejected(self):
+        directory = ROOT / "runs/_cache/tmp/tests"
+        directory.mkdir(parents=True,exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=directory) as temporary:
+            root = Path(temporary)
+            image = root/"image.png"
+            from PIL import Image
+            Image.new("RGB",(32,32)).save(image)
+            record = {"image_id":"cache_test","relative_path":"image.png","sha256":file_hash(image)}
+            key = feature_key(self.config,record,4)
+            cache = root/"runs/_cache/features"
+            cache.mkdir(parents=True)
+            path = cache/(key+".npz")
+            np.savez_compressed(path,x=np.ones((4,512),dtype=np.float32))
+            atomic_json(cache/(key+".json"),{"key":key,"sha256":file_hash(path),"status":"failed"})
+            with patch("data_features.ROOT",root), self.assertRaises(ValueError):
+                extract_features(self.config,root,[record])
 
 
 if __name__ == "__main__":

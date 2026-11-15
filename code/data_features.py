@@ -16,6 +16,8 @@ from PIL import Image
 
 from a_protocol import CLASSES, ROOT, atomic_json, config_hash, file_hash, inside
 
+RESNET_WEIGHTS_SHA256 = "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec"
+
 
 def md5(path: Path) -> str:
     digest = hashlib.md5()
@@ -130,7 +132,7 @@ def feature_key(config: dict, record: dict, views: int) -> str:
                                     if k not in {"hyperparameters","synthetic_loss_weight"}},
         "extractor_source_sha256":file_hash(Path(__file__)),
         "torch":importlib.metadata.version("torch"), "torchvision":importlib.metadata.version("torchvision"),
-        "weights_sha256":"f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec"})
+        "pillow":importlib.metadata.version("pillow"), "weights_sha256":RESNET_WEIGHTS_SHA256})
 
 
 def extract_features(config: dict, run_dir: Path, records: list[dict]) -> tuple[dict, dict]:
@@ -151,7 +153,9 @@ def extract_features(config: dict, run_dir: Path, records: list[dict]) -> tuple[
             if not path.exists() or not meta.exists():
                 raise ValueError("Incomplete feature cache entry")
             prior = json.loads(meta.read_text(encoding="utf-8"))
-            if prior["key"] != key or file_hash(path) != prior["sha256"]:
+            if (prior.get("status") != "success" or not prior.get("backbone_frozen_verified")
+                    or not prior.get("batchnorm_unchanged_verified")
+                    or prior["key"] != key or file_hash(path) != prior["sha256"]):
                 raise ValueError("Feature cache integrity failure")
             with np.load(path,allow_pickle=False) as saved:
                 array = saved["x"].copy()
@@ -167,7 +171,12 @@ def extract_features(config: dict, run_dir: Path, records: list[dict]) -> tuple[
         print(f"[features] {len(todo)} images; {len(output)} cache hits",flush=True)
         load_start = time.perf_counter()
         weights = models.ResNet18_Weights.IMAGENET1K_V1
+        weights_path = ROOT / "runs/_cache/torch/hub/checkpoints/resnet18-f37072fd.pth"
+        if weights_path.exists() and file_hash(weights_path) != RESNET_WEIGHTS_SHA256:
+            raise ValueError("ResNet checkpoint differs from verified ImageNet weights")
         backbone = models.resnet18(weights=weights)
+        if file_hash(weights_path) != RESNET_WEIGHTS_SHA256:
+            raise ValueError("Downloaded ResNet checkpoint failed full SHA-256 check")
         backbone.fc = torch.nn.Identity()
         backbone.requires_grad_(False)
         backbone.to("cuda").eval()
@@ -184,6 +193,7 @@ def extract_features(config: dict, run_dir: Path, records: list[dict]) -> tuple[
         base = weights.transforms()
         work_start = time.perf_counter()
         torch.cuda.reset_peak_memory_stats()
+        pending = []
         try:
             # Batch whole images, keeping all views of an image together.
             per_batch = max(1,cfg["feature_batch_size"]//cfg["train_views"])
@@ -210,14 +220,7 @@ def extract_features(config: dict, run_dir: Path, records: list[dict]) -> tuple[
                 for (record,views,key,path,meta),count in zip(group,counts):
                     array = arrays[offset:offset+count].copy()
                     offset += count
-                    temporary = path.with_name(path.name+".tmp")
-                    with temporary.open("wb") as handle:
-                        np.savez_compressed(handle,x=array)
-                    temporary.replace(path)
-                    entry = {"schema_version":1,"key":key,"sha256":file_hash(path),
-                             "relative_cache_path":str(path.relative_to(ROOT)).replace("\\","/"),"shape":list(array.shape)}
-                    atomic_json(meta,entry)
-                    index.append(dict(entry,image_id=record["image_id"],reused=False))
+                    pending.append((record,array,key,path,meta))
                     output[record["image_id"]] = array
             torch.cuda.synchronize()
             audit["batchnorm_unchanged"] = all(torch.equal(backbone.state_dict()[k],v) for k,v in snapshots.items())
@@ -226,6 +229,18 @@ def extract_features(config: dict, run_dir: Path, records: list[dict]) -> tuple[
             audit["peak_cuda_allocated_bytes"] = torch.cuda.max_memory_allocated()
             if not audit["batchnorm_unchanged"] or not audit["parameters_frozen"]:
                 raise ValueError("Backbone/BatchNorm freezing failed")
+            # Publish cache success only after the actual frozen-model checks pass.
+            for record,array,key,path,meta in pending:
+                temporary = path.with_name(path.name+".tmp")
+                with temporary.open("wb") as handle:
+                    np.savez_compressed(handle,x=array)
+                temporary.replace(path)
+                entry = {"schema_version":1,"status":"success","key":key,"sha256":file_hash(path),
+                    "backbone_frozen_verified":True,"batchnorm_unchanged_verified":True,
+                    "weights_sha256":RESNET_WEIGHTS_SHA256,
+                    "relative_cache_path":str(path.relative_to(ROOT)).replace("\\","/"),"shape":list(array.shape)}
+                atomic_json(meta,entry)
+                index.append(dict(entry,image_id=record["image_id"],reused=False))
         finally:
             del backbone, snapshots
             release_cuda()
