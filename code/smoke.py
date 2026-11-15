@@ -190,6 +190,10 @@ def export_smoke(config: dict, run_dir: Path) -> dict:
     for source,relative in ((run_dir/"manifests/real.json","real_split.json"),
                             (run_dir/"manifests/candidates.json","candidates.json"),
                             (run_dir/"manifests/selections.json","selections.json"),
+                            (run_dir/"manifests/rankings.json","rankings.json"),
+                            (run_dir/"manifests/clip_scores.json","clip_scores.json"),
+                            (run_dir/"features/index.json","feature_index.json"),
+                            (run_dir/"metrics/dev_predictions.json","dev_predictions.json"),
                             (run_dir/"audits/generation_visual.json","generation_visual.json"),
                             (run_dir/"audits/g2_gate.json","g2_gate.json")):
         if source.exists():
